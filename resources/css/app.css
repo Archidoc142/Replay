@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'Circular';
+    src: url('../fonts/Circular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Winston';
+    src: url('../fonts/Winston-Black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Recta';
+    src: url('../fonts/Recta.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*, *::before ,*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+*::-webkit-scrollbar {
+    width: 5px;
+}
+
+*::-webkit-scrollbar-track {
+    background-color: #061935;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #a9a9a9;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Winston', sans-serif;
+}
