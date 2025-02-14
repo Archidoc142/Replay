@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('character', function (Blueprint $table) {
             $table->id();
-            $table->string('theme_color');
+            $table->string('theme_color')->nullable();
             $table->string('name');
             $table->json('meta');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->json('images');
             $table->string('vignette');
         });
