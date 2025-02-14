@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Character extends Model
+{
+    use HasFactory;
+
+    protected $table = 'character';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
+    protected $fillable = [
+        'theme_color',
+        'name',
+        'meta',
+        'description',
+        'images',
+        'vignette',
+    ];
+}
