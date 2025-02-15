@@ -16,6 +16,7 @@ class CategorySeeder extends Seeder
         DB::table('category')->insert([
             ['name' => 'livre'],
             ['name' => 'video'],
+            ['name' => 'musique'],
             ['name' => 'jeu'],
             ['name' => 'film'],
             ['name' => 'serie'],

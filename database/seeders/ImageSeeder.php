@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ImageSeeder extends Seeder
 {
@@ -12,6 +13,11 @@ class ImageSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        DB::table('image')->insert([
+            [
+                "file_name" => "Aether.png",
+                "is_profil" => true,
+            ]
+        ]);
     }
 }
