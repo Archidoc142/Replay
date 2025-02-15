@@ -1,8 +1,9 @@
+import Dropdown from "@/Components/Breeze/Dropdown";
 import { Head } from "@inertiajs/react";
 
 export default function Accueil() {
 
-    return(
+    return (
         <>
             <Head title="Accueil" />
 
