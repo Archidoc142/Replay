@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntityController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
 use Illuminate\Support\Facades\Route;
@@ -16,6 +17,10 @@ Route::get('/search', function () {
 Route::get('/playlists', function () {
     return Inertia::render('Playlists');
 })->name('playlists');
+
+Route::controller(EntityController::class)->group(function() {
+    Route::get('/entity', 'create')->name('newEntity')->middleware(EnsureUserIsLoggedIn::class);
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

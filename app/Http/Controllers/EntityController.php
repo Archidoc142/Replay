@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Entity;
+use Inertia\Inertia;
 
 class EntityController extends Controller
 {
@@ -21,7 +23,9 @@ class EntityController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Entity/CreateEntityForms', [
+            'categories' => Category::all()
+        ]);
     }
 
     /**
