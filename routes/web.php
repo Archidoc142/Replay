@@ -19,7 +19,8 @@ Route::get('/playlists', function () {
 })->name('playlists');
 
 Route::controller(EntityController::class)->group(function() {
-    Route::get('/entity', 'create')->name('newEntity')->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/entity', 'create')->name('createEntity')->middleware(EnsureUserIsLoggedIn::class);
+    Route::post('/entity', 'store')->name('storeEntity')->middleware(EnsureUserIsLoggedIn::class);
 });
 
 Route::middleware('auth')->group(function () {

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Image from './Image';
+import Image from '../Common/Image';
 
-export default function AddImage({filename, setFilename}) {
+export default function AddImage({filename, setFilename, setData, title}) {
     const [imgSrc, setImgSrc] = useState("/img/placeholder_img.png");
 
     function upload(e) {
@@ -9,14 +9,15 @@ export default function AddImage({filename, setFilename}) {
         if (file && file.type.includes("image/")) {
             setImgSrc(URL.createObjectURL(file));
             setFilename(file.name);
+            setData("img", file);
         } else {
             alert("Fichier invalide.");
         }
     }
 
     return (
-        <div className='border-black border-4 rounded-lg overflow-hidden bg-[#23252b] max-w-80 flex flex-col items-center'>
-            <Image className="h-60 m-auto w-auto max-h-40" src={imgSrc} alt="Image sélectionnée" />
+        <div className='border-black border-4 rounded-lg overflow-hidden bg-[#23252b] w-[50%] max-w-[50%] flex flex-col items-center'>
+            <Image isExpandable={true} className="h-60 m-auto w-auto max-h-40" src={imgSrc} alt="Image sélectionnée" />
             {filename ? <p className="w-full text-lg text-center bg-gray-700 py-1">{filename}</p> : null}
 
             <label className="bg-[#7A163C] py-2 px-8 flex flex-nowrap w-fit rounded hover:bg-slate-700 mx-4 mb-4 mt-4 relative">
@@ -32,6 +33,7 @@ export default function AddImage({filename, setFilename}) {
                     accept="image/*"
                 />
             </label>
+            {title ? <p className='pb-2 italic'>{title}</p>:null}
         </div>
     );
 }

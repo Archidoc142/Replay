@@ -8,14 +8,14 @@ import ImageForm from "../../Components/System/ImageForm";
 import JeuForm from "../../Components/System/JeuForm";
 import FilmForm from "../../Components/System/FilmForm";
 
-export default function CreateEntityForms({categories}) {
+export default function CreateEntityForms({categories, tags}) {
 
     const [selectedCat, setSelectedCat] = useState(0)
 
     function renderContent() {
         switch (selectedCat) {
             case "1":
-                return <LivreForm/>;
+                return <LivreForm category={selectedCat} tags={tags} />;
             case "2":
                 return <VideoForm/>;
             case "3":

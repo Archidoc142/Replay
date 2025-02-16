@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Entity extends Model
 {
@@ -25,5 +26,12 @@ class Entity extends Model
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class, 'id_author');
+    }
+
+    // Relation avec tables Pivot
+
+    public function tags() : BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class, 'tag_entity');
     }
 }
