@@ -34,4 +34,14 @@ class Entity extends Model
     {
         return $this->belongsToMany(Tag::class, 'tag_entity', 'id_entity', 'id_tag');
     }
+
+    public function characters() : BelongsToMany
+    {
+        return $this->belongsToMany(Character::class, 'character_entity', 'id_entity', 'id_character');
+    }
+
+    public function playlists() : BelongsToMany
+    {
+        return $this->belongsToMany(Playlist::class, 'playlist_entity', 'id_entity', 'id_playlist');
+    }
 }

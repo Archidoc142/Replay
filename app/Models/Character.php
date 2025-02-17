@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Character extends Model
 {
@@ -20,4 +21,9 @@ class Character extends Model
         'images',
         'vignette',
     ];
+
+    public function entities() : BelongsToMany
+    {
+        return $this->belongsToMany(Entity::class, 'character_entity', 'id_character', 'id_entity');
+    }
 }
