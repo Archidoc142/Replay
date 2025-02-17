@@ -33,7 +33,7 @@ export default function AddImage({filename, setFilename, title, className, onFil
                     accept="image/*"
                 />
             </div>
-            {title ? <p className='italic absolute bg-[#6e6969c0] px-5 rounded-b-lg text-center '>{title}</p>:null}
+            {title ? <p className='italic absolute bg-[#6e6969c0] px-3 rounded-b-lg text-center '>{title}</p>:null}
         </div>
     );
 }

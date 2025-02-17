@@ -7,7 +7,6 @@ export default function LivreForm({ category, tags }) {
 
     const [meta, setMeta] = useState({
         img_couverture: "",
-        img_vignette: "",
         description: "",
         note: 0,
         lien: ""
@@ -20,7 +19,6 @@ export default function LivreForm({ category, tags }) {
         author_name: "",
         tags_form: [],
         img_couverture: null,
-        img_vignette: null,
     })
 
     function submit(e) {
@@ -34,18 +32,18 @@ export default function LivreForm({ category, tags }) {
         setMeta(prev => ({ ...prev, [key]: value }));
     }
 
-    useEffect(() => {
-        setData('meta', JSON.stringify(meta));
-    }, [meta])
-
     function handleFileUpload(key, file) {
         setData(key, file);
         setMeta(prev => ({ ...prev, [key]: file.name }));
     }
 
+    useEffect(() => {
+        setData('meta', JSON.stringify(meta));
+    }, [meta])
+
     return (
         <form onSubmit={submit} className="p-6">
-            <div className="flex">
+            <div className="flex gap-2">
                 {/* Image de couverture du livre*/}
                 <AddImage
                     onFileUpload={(file) => handleFileUpload('img_couverture', file)}
@@ -54,86 +52,48 @@ export default function LivreForm({ category, tags }) {
                     title="Image de couverture"
                 />
 
-                <div className="pl-4 w-full flex flex-col gap-2">
+                <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
+
                     {/* Titre du livre*/}
-                    <div>
-                        <label htmlFor="title">Titre du livre</label><br />
-                        <input
-                            type="text"
-                            name="title"
-                            placeholder="Insérer le titre..."
-                            required
-                            onChange={(e) => { setData("title", e.target.value) }}
-                            className="w-full"
-                        />
+                    <div className="form__group field">
+                        <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { setData("title", e.target.value) }} />
+                        <label for="title" class="form__label">Titre du livre</label>
                     </div>
 
                     <div className="flex gap-6">
-                        {/* Note du livre*/}
-                        <div className="w-2/3">
-                            <label htmlFor="realisateur">Réalisateur du livre (facultatif)</label><br />
-                            <input
-                                type="text"
-                                name="realisateur"
-                                onChange={(e) => setData("author_name", e.target.value)}
-                                className="w-full"
-                                placeholder="Insérer le nom du réalisateur"
-                            />
+                        {/* Réalisateur du livre*/}
+                        <div className="form__group field !w-2/3">
+                            <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { setData("author_name", e.target.value) }} />
+                            <label for="realisateur" class="form__label">Réalisateur du livre</label>
                         </div>
 
                         {/* Note du livre*/}
-                        <div className="w-1/3">
-                            <label htmlFor="note">Note du livre</label><br />
-                            <input
-                                type="number"
-                                name="note"
-                                min={0}
-                                max={100}
-                                required
-                                onChange={(e) => updateMeta("note", e.target.value)}
-                                className="w-full"
-                                placeholder="0 à 100"
-                            />
+                        <div className="form__group field !w-1/3">
+                            <input type="number" class="form__field" min={0} max={100} placeholder="" required="" onChange={(e) => { updateMeta("note", e.target.value) }} />
+                            <label for="note" class="form__label">Note du livre</label>
                         </div>
                     </div>
 
                     {/* Lien vers le livre*/}
-                    <div>
-                        <label htmlFor="lien">Lien vers le livre</label><br />
-                        <input
-                            type="text"
-                            name="lien"
-                            placeholder="Insérer lien vers la lecture du livre..."
-                            required
-                            onChange={(e) => updateMeta("lien", e.target.value)}
-                            className="w-full"
-                        />
+                    <div className="form__group field">
+                        <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { updateMeta("lien", e.target.value) }} />
+                        <label for="lien" class="form__label">Lien vers le livre</label>
+                    </div>
+
+                    {/* Description du livre*/}
+                    <div className="mt-2">
+                        <label htmlFor="description" className="font-bold">Description du livre</label><br />
+                        <textarea
+                            name="description"
+                            placeholder="Insérer la description du livre..."
+                            onChange={(e) => updateMeta("description", e.target.value)}
+                            className="w-full min-h-24 rounded-br-3xl text-white bg-[#d1cfcf10] border-none"
+                        ></textarea>
                     </div>
                 </div>
             </div>
 
             <div>
-                <div className="mt-4 flex gap-6">
-                    {/* Description du livre*/}
-                    <div className="w-1/2 pb-6">
-                        <label htmlFor="description" className="text-lg font-bold">Description du livre</label><br />
-                        <textarea
-                            name="description"
-                            placeholder="Insérer la description du livre..."
-                            onChange={(e) => updateMeta("description", e.target.value)}
-                            className="w-full h-full rounded-br-3xl text-black"
-                        ></textarea>
-                    </div>
-
-                    {/* Image de vignette du livre*/}
-                    <AddImage
-                        onFileUpload={(file) => handleFileUpload('img_vignette', file)}
-                        filename={meta.img_vignette}
-                        setFilename={(value) => updateMeta("img_vignette", value)}
-                        title="Image de vignette"
-                    />
-                </div>
-
                 <h3 className="text-2xl mt-4 mb-2">Genres du livre</h3>
 
                 <div className="flex flex-wrap gap-2">

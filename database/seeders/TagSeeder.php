@@ -19,7 +19,8 @@ class TagSeeder extends Seeder
             ['name' => 'RPG'],
             ['name' => 'Stratégie'],
             ['name' => 'Platformer'],
-            ['name' => 'Fantaisie'],
+            ['name' => 'Fantastique'],
+            ['name' => 'Merveilleux'],
             ['name' => 'Science-fiction'],
             ['name' => 'Drame'],
             ['name' => 'Comédie'],
@@ -27,6 +28,7 @@ class TagSeeder extends Seeder
             ['name' => 'Historique'],
             ['name' => 'Cyberpunk'],
             ['name' => 'Steampunk'],
+            ['name' => 'Réincarnation'],
         ]);
     }
 }

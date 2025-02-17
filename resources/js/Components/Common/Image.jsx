@@ -6,6 +6,11 @@ export default function Image({ src, alt, isExpandable = false, classname }) {
     const [bigImg, setBigImg] = useState(false)
     const [isExpanded, setIsExpanded] = useState(false);
 
+    function handleClick() {
+        setBigImg(true)
+        setIsExpanded(false)
+    }
+
     function toggleSize() {
         setIsExpanded((prev) => !prev);
     }
@@ -16,7 +21,7 @@ export default function Image({ src, alt, isExpandable = false, classname }) {
                 src={src ? src : "/img/placeholder_img.png"}
                 alt={alt ? alt : "Image"}
                 className={"cursor-pointer " + classname}
-                onClick={() => setBigImg(true)}
+                onClick={handleClick}
             />
 
             {
@@ -34,8 +39,8 @@ export default function Image({ src, alt, isExpandable = false, classname }) {
                         {
                             bigImg ?
                                 <>
-                                    <div className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center">
-                                        <img className={`cursor-pointer fixed z-50 ${isExpanded ? "w-auto" : "max-w-[55%]"}`} src={src} alt="Image Expanded" onClick={toggleSize} />
+                                    <div className="absolute inset-0 center">
+                                        <img className={`cursor-pointer fixed z-50 max-h-[80%] ${isExpanded ? "w-auto max-w-[80%]" : "max-w-[55%]"}`} src={src} alt="Image Expanded" onClick={toggleSize} />
                                     </div>
                                 </> : null
                         }

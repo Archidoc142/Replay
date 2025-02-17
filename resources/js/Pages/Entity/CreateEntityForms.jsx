@@ -8,7 +8,7 @@ import ImageForm from "../../Components/System/ImageForm";
 import JeuForm from "../../Components/System/JeuForm";
 import FilmForm from "../../Components/System/FilmForm";
 
-export default function CreateEntityForms({categories, tags}) {
+export default function CreateEntityForms({ categories, tags }) {
 
     const [selectedCat, setSelectedCat] = useState(0)
 
@@ -17,49 +17,58 @@ export default function CreateEntityForms({categories, tags}) {
             case "1":
                 return <LivreForm category={selectedCat} tags={tags} />;
             case "2":
-                return <VideoForm/>;
+                return <VideoForm />;
             case "3":
-                return <MusiqueForm/>;
+                return <MusiqueForm />;
             case "4":
-                return <JeuForm/>;
+                return <JeuForm />;
             case "5":
-                return <FilmForm/>;
+                return <FilmForm />;
             case "6":
-                return <SerieForm/>;
+                return <SerieForm />;
             case "7":
-                return <ImageForm/>;
+                return <ImageForm />;
             default:
                 return null;
         }
     }
 
-    return(
+    return (
         <>
             <Head title="Création Entité" />
 
             <div className="flex justify-center py-10">
-                <div className="bg-gray-800 w-1/2">
-                    <h1 className="text-4xl p-6">Créer une ressource</h1>
+                <div className="bg-gray-800 w-1/2 rounded-xl min-w-[800px]">
+                    <h1 className="text-4xl p-6 text-[#ff5e00]">Créer une ressource</h1>
 
                     <select
-                        className="text-black w-full h-20 text-2xl px-8 cursor-pointer"
+                        className="text-gray-800 w-full h-20 text-2xl px-8 cursor-pointer bg-gray-300 font-bold"
                         value={selectedCat}
                         onChange={(e) => setSelectedCat(e.target.value)}
                     >
-                        <option value={0}>Choisir une catégorie</option>
+                        <option className="bg-[#14151a] text-gray-500" value={0}>Choisir une catégorie</option>
                         {
                             categories.map(category => (
-                                <option value={category.id} key={category.id}>{category.name}</option>
+                                <option
+                                    value={category.id}
+                                    key={category.id}
+                                    className="bg-[#14151a] text-gray-500"
+                                >
+                                    {category.name}
+                                </option>
                             ))
                         }
                     </select>
 
                     <div className="min-h-24">
-                        <h2 className="p-6 text-3xl">{selectedCat != 0 ? categories[selectedCat - 1].name : null}</h2>
 
-                        <hr className="border-gray-500 mx-6" />
+                        {selectedCat != 0 ?
+                        <div>
+                            <h2 className="p-6 text-3xl">{categories[selectedCat - 1].name}</h2>
+                            <hr className="border-gray-500 mx-6" />
+                        </div> : null}
 
-                        { renderContent() }
+                        {renderContent()}
                     </div>
                 </div>
             </div>
