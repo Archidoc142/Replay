@@ -35,7 +35,7 @@ export default function Image({ src, alt, isExpandable = false, classname }) {
                             bigImg ?
                                 <>
                                     <div className="absolute top-0 left-0 h-screen w-screen flex items-center justify-center">
-                                        <img className={`fixed z-50 ${isExpanded ? "w-auto" : "max-w-[55%]"}`} src={src} alt="Image Expanded" onClick={toggleSize} />
+                                        <img className={`cursor-pointer fixed z-50 ${isExpanded ? "w-auto" : "max-w-[55%]"}`} src={src} alt="Image Expanded" onClick={toggleSize} />
                                     </div>
                                 </> : null
                         }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Entity;
@@ -35,7 +36,44 @@ class EntityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $meta = json_decode($request->meta, true);
+
+        function saveImageWithoutDuplicate($file)
+        {
+            $filename = $file->getClientOriginalName();
+            $file->move(public_path('img'), $filename);
+            return $filename;
+        }
+
+        if ($request->hasFile('img_couverture')) {
+            $meta['img_couverture'] = saveImageWithoutDuplicate($request->file('img_couverture'));
+        }
+
+        if ($request->hasFile('img_vignette')) {
+            $meta['img_vignette'] = saveImageWithoutDuplicate($request->file('img_vignette'));
+        }
+
+        $entity = Entity::create([
+            'title' => $request->title,
+            'meta' => json_encode($meta),
+            'id_category' => $request->id_category,
+        ]);
+
+        if (isset($request->author_name)) {
+            $author = Author::firstOrCreate(
+                ['name' => $request->author_name],
+                ['name' => $request->author_name]
+            );
+
+            $entity->id_author = $author->id;
+            $entity->save();
+        }
+
+        if (!empty($request->tags_form)) {
+            $entity->tags()->syncWithoutDetaching($request->tags_form);
+        }
+
+        return redirect("/");
     }
 
     /**

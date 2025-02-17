@@ -13,17 +13,21 @@ export default function LivreForm({ category, tags }) {
         lien: ""
     });
 
-    const { data, setData, post } = useForm({
+    const { data, setData, post, processing } = useForm({
         title: "",
-        meta: {},
+        meta: JSON.stringify(meta),
         id_category: category,
-        id_author: null,
-        tags_form: []
+        author_name: "",
+        tags_form: [],
+        img_couverture: null,
+        img_vignette: null,
     })
 
     function submit(e) {
         e.preventDefault();
-        post('/entity');
+        post('/entity', {
+            forceFormData: true
+        });
     }
 
     function updateMeta(key, value) {
@@ -32,21 +36,21 @@ export default function LivreForm({ category, tags }) {
 
     useEffect(() => {
         setData('meta', JSON.stringify(meta));
-        console.log(data.meta)
     }, [meta])
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
+    function handleFileUpload(key, file) {
+        setData(key, file);
+        setMeta(prev => ({ ...prev, [key]: file.name }));
+    }
 
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex">
                 {/* Image de couverture du livre*/}
                 <AddImage
+                    onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
                     setFilename={(value) => updateMeta("img_couverture", value)}
-                    setData={setData}
                     title="Image de couverture"
                 />
 
@@ -66,18 +70,19 @@ export default function LivreForm({ category, tags }) {
 
                     <div className="flex gap-6">
                         {/* Note du livre*/}
-                        <div className="w-3/4">
+                        <div className="w-2/3">
                             <label htmlFor="realisateur">Réalisateur du livre (facultatif)</label><br />
                             <input
                                 type="text"
                                 name="realisateur"
-                                onChange={(e) => updateMeta("note", e.target.value)}
+                                onChange={(e) => setData("author_name", e.target.value)}
                                 className="w-full"
+                                placeholder="Insérer le nom du réalisateur"
                             />
                         </div>
 
                         {/* Note du livre*/}
-                        <div className="w-1/4">
+                        <div className="w-1/3">
                             <label htmlFor="note">Note du livre</label><br />
                             <input
                                 type="number"
@@ -104,21 +109,31 @@ export default function LivreForm({ category, tags }) {
                             className="w-full"
                         />
                     </div>
-
-                    {/* Description du livre*/}
-                    <div>
-                        <label htmlFor="description">Lien vers le livre</label><br />
-                        <textarea
-                            name="description"
-                            placeholder="Insérer la description du livre..."
-                            onChange={(e) => { setData("description", e.target.value) }}
-                            className="w-full"
-                        ></textarea>
-                    </div>
                 </div>
             </div>
 
             <div>
+                <div className="mt-4 flex gap-6">
+                    {/* Description du livre*/}
+                    <div className="w-1/2 pb-6">
+                        <label htmlFor="description" className="text-lg font-bold">Description du livre</label><br />
+                        <textarea
+                            name="description"
+                            placeholder="Insérer la description du livre..."
+                            onChange={(e) => updateMeta("description", e.target.value)}
+                            className="w-full h-full rounded-br-3xl text-black"
+                        ></textarea>
+                    </div>
+
+                    {/* Image de vignette du livre*/}
+                    <AddImage
+                        onFileUpload={(file) => handleFileUpload('img_vignette', file)}
+                        filename={meta.img_vignette}
+                        setFilename={(value) => updateMeta("img_vignette", value)}
+                        title="Image de vignette"
+                    />
+                </div>
+
                 <h3 className="text-2xl mt-4 mb-2">Genres du livre</h3>
 
                 <div className="flex flex-wrap gap-2">
@@ -138,9 +153,10 @@ export default function LivreForm({ category, tags }) {
             <div className="flex justify-center mt-4">
                 <button
                     type="submit"
+                    disabled={processing}
                     className="bg-[#7A163C] py-2 px-4 rounded-md w-full hover:bg-[#88254b]"
                 >
-                    Enregistrer
+                    {processing ? 'Enregistrement en cours...' : 'Enregistrer'}
                 </button>
             </div>
         </form>

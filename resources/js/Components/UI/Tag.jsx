@@ -21,9 +21,9 @@ export default function Tag({ id, text, isClickable = false, setData, data }) {
     return (
         <p
             className={`
-                unselectable cursor-pointer py-[2px] px-[6px] rounded-xl border-2 border-gray-700
+                unselectable cursor-pointer py-[2px] px-[6px] rounded-xl border-2
                 ${isClickable ? ' hover:bg-gray-500 ' : ''}
-                ${ active ? 'border-blue-500 bg-gray-500' : ' bg-gray-600'}
+                ${ active ? ' border-blue-500 bg-gray-500' : ' border-gray-700 bg-gray-600'}
             `}
             onClick={handleClick}
         >

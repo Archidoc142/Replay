@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Entity extends Model
 {
-    protected $table = 'character';
+    protected $table = 'entity';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
@@ -32,6 +32,6 @@ class Entity extends Model
 
     public function tags() : BelongsToMany
     {
-        return $this->belongsToMany(Tag::class, 'tag_entity');
+        return $this->belongsToMany(Tag::class, 'tag_entity', 'id_entity', 'id_tag');
     }
 }
