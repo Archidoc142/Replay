@@ -7,6 +7,7 @@ import SerieForm from "../../Components/System/SerieFilm";
 import ImageForm from "../../Components/System/ImageForm";
 import JeuForm from "../../Components/System/JeuForm";
 import FilmForm from "../../Components/System/FilmForm";
+import AnimeForm from "@/Components/System/AnimeForm";
 
 export default function CreateEntityForms({ categories, tags }) {
 
@@ -15,19 +16,21 @@ export default function CreateEntityForms({ categories, tags }) {
     function renderContent() {
         switch (selectedCat) {
             case "1":
-                return <LivreForm category={selectedCat} tags={tags} />;
+                return <LivreForm category={selectedCat} tags={tags}/>;
             case "2":
-                return <VideoForm />;
+                return <VideoForm category={selectedCat}/>;
             case "3":
-                return <MusiqueForm />;
+                return <MusiqueForm category={selectedCat}/>;
             case "4":
-                return <JeuForm />;
+                return <JeuForm category={selectedCat} tags={tags}/>;
             case "5":
-                return <FilmForm />;
+                return <FilmForm category={selectedCat}/>;
             case "6":
-                return <SerieForm />;
+                return <SerieForm category={selectedCat}/>;
             case "7":
-                return <ImageForm />;
+                return <ImageForm category={selectedCat}/>;
+            case "8":
+                return <AnimeForm category={selectedCat} tags={tags}/>;
             default:
                 return null;
         }

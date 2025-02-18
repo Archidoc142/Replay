@@ -21,6 +21,7 @@ class CategorySeeder extends Seeder
             ['name' => 'Film'],
             ['name' => 'Série'],
             ['name' => 'Image'],
+            ['name' => 'Anime'],
         ]);
     }
 }

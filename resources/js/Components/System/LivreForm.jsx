@@ -50,34 +50,35 @@ export default function LivreForm({ category, tags }) {
                     filename={meta.img_couverture}
                     setFilename={(value) => updateMeta("img_couverture", value)}
                     title="Image de couverture"
+                    className="w-[40%]"
                 />
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
 
                     {/* Titre du livre*/}
                     <div className="form__group field">
-                        <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { setData("title", e.target.value) }} />
-                        <label for="title" class="form__label">Titre du livre</label>
+                        <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { setData("title", e.target.value) }} />
+                        <label htmlFor="title" className="form__label">Titre du livre</label>
                     </div>
 
                     <div className="flex gap-6">
                         {/* Réalisateur du livre*/}
                         <div className="form__group field !w-2/3">
-                            <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                            <label for="realisateur" class="form__label">Réalisateur du livre</label>
+                            <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { setData("author_name", e.target.value) }} />
+                            <label htmlFor="realisateur" className="form__label">Réalisateur du livre</label>
                         </div>
 
                         {/* Note du livre*/}
                         <div className="form__group field !w-1/3">
-                            <input type="number" class="form__field" min={0} max={100} placeholder="" required="" onChange={(e) => { updateMeta("note", e.target.value) }} />
-                            <label for="note" class="form__label">Note du livre</label>
+                            <input type="number" className="form__field" min={0} max={100} placeholder="" required="" onChange={(e) => { updateMeta("note", e.target.value) }} />
+                            <label htmlFor="note" className="form__label">Note du livre</label>
                         </div>
                     </div>
 
                     {/* Lien vers le livre*/}
                     <div className="form__group field">
-                        <input type="text" class="form__field" placeholder="" required="" onChange={(e) => { updateMeta("lien", e.target.value) }} />
-                        <label for="lien" class="form__label">Lien vers le livre</label>
+                        <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { updateMeta("lien", e.target.value) }} />
+                        <label htmlFor="lien" className="form__label">Lien vers le livre</label>
                     </div>
 
                     {/* Description du livre*/}

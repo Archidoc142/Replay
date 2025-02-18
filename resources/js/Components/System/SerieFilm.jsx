@@ -1,4 +1,4 @@
-export default function SerieForm() {
+export default function SerieForm({category}) {
     return(
         <>
 

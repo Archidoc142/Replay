@@ -1,4 +1,4 @@
-export default function ImageForm() {
+export default function ImageForm({category}) {
     return(
         <>
 

@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ShadowScreen from "../UI/ShadowScreen"
 
-export default function Image({ src, alt, isExpandable = false, classname }) {
+export default function Image({ src, alt, isExpandable = false, className }) {
 
     const [bigImg, setBigImg] = useState(false)
     const [isExpanded, setIsExpanded] = useState(false);
@@ -20,7 +20,7 @@ export default function Image({ src, alt, isExpandable = false, classname }) {
             <img
                 src={src ? src : "/img/placeholder_img.png"}
                 alt={alt ? alt : "Image"}
-                className={"cursor-pointer " + classname}
+                className={"cursor-pointer " + className}
                 onClick={handleClick}
             />
 

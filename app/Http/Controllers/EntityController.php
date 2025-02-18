@@ -55,7 +55,7 @@ class EntityController extends Controller
 
         $entity = Entity::create([
             'title' => $request->title,
-            'meta' => json_encode($meta, JSON_UNESCAPED_SLASHES),
+            'meta' => json_encode($meta),
             'id_category' => $request->id_category,
         ]);
 

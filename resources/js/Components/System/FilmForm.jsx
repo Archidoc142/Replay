@@ -1,4 +1,4 @@
-export default function FilmForm() {
+export default function FilmForm({category}) {
     return(
         <>
 
