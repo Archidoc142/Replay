@@ -24,9 +24,9 @@ export default function CreateEntityForms({ categories, tags }) {
             case "4":
                 return <JeuForm category={selectedCat} tags={tags}/>;
             case "5":
-                return <FilmForm category={selectedCat}/>;
+                return <FilmForm category={selectedCat} tags={tags}/>;
             case "6":
-                return <SerieForm category={selectedCat}/>;
+                return <SerieForm category={selectedCat} tags={tags}/>;
             case "7":
                 return <ImageForm category={selectedCat}/>;
             case "8":

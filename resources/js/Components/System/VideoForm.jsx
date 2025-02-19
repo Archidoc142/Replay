@@ -40,19 +40,19 @@ export default function VideoForm({ category }) {
             <div className="w-full flex flex-col gap-2">
                 {/* Titre de la Vidéo*/}
                 <div className="form__group field">
-                    <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { setData("title", e.target.value) }} />
+                    <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                     <label htmlFor="title" className="form__label">Titre de la Vidéo</label>
                 </div>
 
                 {/* Réalisateur de la Vidéo*/}
                 <div className="form__group field">
-                    <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { setData("author_name", e.target.value) }} />
+                    <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
                     <label htmlFor="realisateur" className="form__label">Auteur de la Vidéo</label>
                 </div>
 
                 {/* Iframe de la Vidéo*/}
                 <div className="form__group field">
-                    <input type="text" className="form__field" placeholder="" required="" onChange={(e) => { updateMeta("video", e.target.value) }} />
+                    <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
                     <label htmlFor="video" className="form__label">Iframe de la Vidéo</label>
                 </div>
             </div>

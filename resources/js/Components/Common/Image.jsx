@@ -22,6 +22,7 @@ export default function Image({ src, alt, isExpandable = false, className }) {
                 alt={alt ? alt : "Image"}
                 className={"cursor-pointer " + className}
                 onClick={handleClick}
+                loading="lazy"
             />
 
             {
