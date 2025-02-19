@@ -18,9 +18,9 @@ export default function Image({ src, alt, isExpandable = false, className }) {
     return (
         <>
             <img
-                src={src ? src : "/img/placeholder_img.png"}
+                src={src ? "" + src : "/img/placeholder_img.png"}
                 alt={alt ? alt : "Image"}
-                className={"cursor-pointer " + className}
+                className={`${isExpandable ? "cursor-pointer" : ""} ` + className}
                 onClick={handleClick}
                 loading="lazy"
             />

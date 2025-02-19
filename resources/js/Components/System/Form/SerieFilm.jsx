@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../UI/AddImage";
-import Tag from "../UI/Tag";
+import AddImage from "../../UI/AddImage";
+import Tag from "../../UI/Tag";
 
-export default function FilmForm({ category, tags }) {
-
+export default function SerieForm({ category, tags }) {
     const [meta, setMeta] = useState({
         img_couverture: "",
         description: "",
@@ -44,7 +43,7 @@ export default function FilmForm({ category, tags }) {
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex gap-2">
-                {/* Image de couverture du Film*/}
+                {/* Image de couverture de la Série*/}
                 <AddImage
                     onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
@@ -55,38 +54,38 @@ export default function FilmForm({ category, tags }) {
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
 
-                    {/* Titre du Film*/}
+                    {/* Titre de la Série*/}
                     <div className="form__group field">
                         <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
-                        <label htmlFor="title" className="form__label">Titre du film</label>
+                        <label htmlFor="title" className="form__label">Titre de la série</label>
                     </div>
 
                     <div className="flex gap-6">
-                        {/* Réalisateur du Film*/}
+                        {/* Réalisateur de la Série*/}
                         <div className="form__group field !w-2/3">
                             <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                            <label htmlFor="realisateur" className="form__label">Réalisateur du film</label>
+                            <label htmlFor="realisateur" className="form__label">Réalisateur de la série</label>
                         </div>
 
-                        {/* Note du Film*/}
+                        {/* Note de la Série*/}
                         <div className="form__group field !w-1/3">
                             <input type="number" className="form__field" min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
-                            <label htmlFor="note" className="form__label">Note du film</label>
+                            <label htmlFor="note" className="form__label">Note de la série</label>
                         </div>
                     </div>
 
-                    {/* Iframe du trailer*/}
+                    {/* Trailer de la Série*/}
                     <div className="form__group field">
                         <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
-                        <label htmlFor="lien" className="form__label">Iframe du trailer</label>
+                        <label htmlFor="lien" className="form__label">Trailer de la série</label>
                     </div>
 
-                    {/* Description du Film*/}
+                    {/* Description de la Série*/}
                     <div className="mt-2">
-                        <label htmlFor="description" className="font-bold">Description du film</label><br />
+                        <label htmlFor="description" className="font-bold">Description de la série</label><br />
                         <textarea
                             name="description"
-                            placeholder="Insérer la description du film..."
+                            placeholder="Insérer la description de la série..."
                             onChange={(e) => updateMeta("description", e.target.value)}
                             className="w-full min-h-24 rounded-br-3xl text-white bg-[#d1cfcf10] border-none"
                         ></textarea>

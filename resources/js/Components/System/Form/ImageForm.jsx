@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../UI/AddImage"
+import AddImage from "../../UI/AddImage"
 
 export default function ImageForm({ category }) {
 

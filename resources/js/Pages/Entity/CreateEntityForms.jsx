@@ -1,13 +1,13 @@
 import { Head } from "@inertiajs/react";
 import { useState } from "react";
-import LivreForm from "../../Components/System/LivreForm";
-import VideoForm from "../../Components/System/VideoForm";
-import MusiqueForm from "../../Components/System/MusiqueForm";
-import SerieForm from "../../Components/System/SerieFilm";
-import ImageForm from "../../Components/System/ImageForm";
-import JeuForm from "../../Components/System/JeuForm";
-import FilmForm from "../../Components/System/FilmForm";
-import AnimeForm from "@/Components/System/AnimeForm";
+import LivreForm from "../../Components/System/Form/LivreForm";
+import VideoForm from "../../Components/System/Form/VideoForm";
+import MusiqueForm from "../../Components/System/Form/MusiqueForm";
+import SerieForm from "../../Components/System/Form/SerieFilm";
+import ImageForm from "../../Components/System/Form/ImageForm";
+import JeuForm from "../../Components/System/Form/JeuForm";
+import FilmForm from "../../Components/System/Form/FilmForm";
+import AnimeForm from "@/Components/System/Form/AnimeForm";
 
 export default function CreateEntityForms({ categories, tags }) {
 
