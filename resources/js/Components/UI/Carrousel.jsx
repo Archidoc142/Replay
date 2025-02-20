@@ -63,6 +63,7 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
                                     key={data.id}
                                     data={data}
                                     genres={genres}
+                                    isAnimated={true}
                                 />
                             ) : (
                                 <MusicNamecard key={data.id} data={data} />

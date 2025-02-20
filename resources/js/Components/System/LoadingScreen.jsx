@@ -1,15 +1,43 @@
-import { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
+import { useRef, useEffect } from 'react'
+import { gsap } from 'gsap'
 
-const LoadingScreen = ({ progress }) => {
-    const spinnerRef = useRef(null);
+export default function LoadingScreen({ setIsLoading, setLoadingProgress, progress }) {
+    const spinnerRef = useRef(null)
 
     useEffect(() => {
         gsap.fromTo(
             spinnerRef.current,
             { rotation: 0 },
             { rotation: 360, repeat: -1, duration: 1, ease: 'linear' }
-        );
+        )
+    }, [])
+
+    useEffect(() => {
+        const images = document.querySelectorAll('img');
+        let loadedImages = 0;
+
+        const updateProgress = () => {
+            loadedImages++;
+            const progress = (loadedImages / images.length) * 100;
+            setLoadingProgress(progress);
+
+            if (loadedImages === images.length) {
+                setIsLoading(false);
+            }
+        };
+
+        images.forEach((img) => {
+            if (img.complete) {
+                updateProgress();
+            } else {
+                img.onload = updateProgress;
+                img.onerror = updateProgress;
+            }
+        });
+
+        if (images.length === 0) {
+            setIsLoading(false);
+        }
     }, []);
 
     return (
@@ -22,7 +50,5 @@ const LoadingScreen = ({ progress }) => {
                 Chargement... {Math.round(progress)}%
             </p>
         </div>
-    );
-};
-
-export default LoadingScreen;
+    )
+}

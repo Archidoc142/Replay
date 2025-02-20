@@ -1,11 +1,22 @@
 import Image from "@/Components/Common/Image";
 import { Link } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Tag from "../Tag";
+import gsap from "gsap";
 
-export default function EntityNamecard({ data, genres }) {
+export default function EntityNamecard({ data, genres, isAnimated = false }) {
 
     const [hover, setHover] = useState(false)
+    const [isVisble, setIsVisble] = useState(false)
+    const container = useRef(null)
+
+    useEffect(() => {
+        setIsVisble(true)
+        gsap.to(container.current, {
+            width: hover ? 250 : 0,
+            duration: isAnimated ? 0.3 : 0
+        })
+    }, [hover])
 
     return (
         <div
@@ -20,16 +31,16 @@ export default function EntityNamecard({ data, genres }) {
             />
 
             {
-                hover ?
-                    <div className="hidden group-hover:flex absolute bg-[#181818bb] w-full h-full rounded-lg overflow-hidden">
-                        <div className="flex pt-2 pl-3 pb-3 flex-col justify-between">
+                isVisble ?
+                    <div className="hidden group-hover:flex absolute w-full h-full rounded-lg overflow-hidden min-w-[250px] group-hover:min-w-[500px]">
+                        <div className="flex pt-2 pl-3 pb-3 flex-col justify-between w-[250px] bg-[#181818bb]">
                             {/* Infos Principaux*/}
                             <div>
                                 <p className="">{data.title}</p>
                                 <p>Par: {data.author}</p>
 
                                 <div className="flex items-center gap-1">
-                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="yellow" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                                     <p className="">{data.meta.note / 20}</p>
                                 </div>
                             </div>
@@ -50,7 +61,7 @@ export default function EntityNamecard({ data, genres }) {
                                                 </div>
                                             ))}
                                         </div>
-                                    : null
+                                        : null
                                 }
 
                                 {/* Barre d'action*/}
@@ -69,8 +80,10 @@ export default function EntityNamecard({ data, genres }) {
                                 </div>
                             </div>
                         </div>
-                        <div className="absolute left-1/2 p-4 bg-[#181818f1] h-full">
-                            <p className="text-sm">{data.meta.description}</p>
+                        <div ref={container} className="absolute left-1/2 bg-[#181818f1] h-full overflow-hidden">
+                            <div className="relative min-w-[250px]">
+                                <p className="text-sm absolute inset-0 p-4">{data.meta.description}</p>
+                            </div>
                         </div>
                     </div>
                     : <p>{data.title}</p>
