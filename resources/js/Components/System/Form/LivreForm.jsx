@@ -65,7 +65,7 @@ export default function LivreForm({ category, tags }) {
                         {/* Réalisateur du livre*/}
                         <div className="form__group field !w-2/3">
                             <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                            <label htmlFor="realisateur" className="form__label">Réalisateur du livre</label>
+                            <label htmlFor="realisateur" className="form__label">Auteur du livre</label>
                         </div>
 
                         {/* Note du livre*/}

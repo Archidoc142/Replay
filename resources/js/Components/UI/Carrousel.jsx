@@ -13,7 +13,7 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
         let newIndex = 0
         if (index - nb_items > 0) { newIndex = index - nb_items }
         else if (index != 0){ newIndex = 0 }
-        else if (datas.length - nb_items > 0) { newIndex = datas.length - nb_items }
+        else if (datas.length - nb_items > 0) { newIndex = datas.length - nb_items + 1 }
 
         setIndex(newIndex)
         animateCarrousel(newIndex)
@@ -39,8 +39,8 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
     }
 
     return (
-        <div className={"mt-8 overflow-hidden " + className}>
-            <div className="m-4 ml-8 flex items-center gap-6">
+        <div className={"mt-4 overflow-hidden " + className}>
+            <div className=" ml-6 mt-2 flex items-center gap-6">
                 {children}
                 <h3 className="unselectable text-3xl text-[#ff5e00]">{title}</h3>
             </div>
@@ -52,7 +52,7 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
                     </svg>
                 </button>
 
-                <div className="flex justify-between w-full p-8 overflow-hidden">
+                <div className="flex justify-between w-full py-6 overflow-hidden">
                     <div
                         ref={carrouselRef}
                         className="flex gap-4"
