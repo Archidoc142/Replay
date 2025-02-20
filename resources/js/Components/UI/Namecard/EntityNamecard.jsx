@@ -1,27 +1,29 @@
 import Image from "@/Components/Common/Image";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
+import Tag from "../Tag";
 
-export default function EntityNamecard({ data }) {
+export default function EntityNamecard({ data, genres }) {
 
     const [hover, setHover] = useState(false)
 
     return (
         <div
-            className="flex flex-col gap-2 text-lg relative group hover:w-[500px] unselectable"
+            className="flex flex-col gap-2 text-lg relative group max-w-[250px] hover:min-w-[500px] unselectable min-h-[429px] max-h-[429px]"
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
             <Image
                 src={"/img/" + data.meta.img_couverture}
                 alt="General Entity Namecard"
-                className="cursor-pointer max-w-[250px] min-h-[365px] max-h-[365px] group-hover:rounded-l-lg group-hover:grayscale-[0.2]"
+                className="cursor-pointer max-w-[250px] min-h-[365px] max-h-[365px] group-hover:rounded-tl-lg group-hover:grayscale-[0.2]"
             />
 
             {
                 hover ?
                     <div className="hidden group-hover:flex absolute bg-[#181818bb] w-full h-full rounded-lg overflow-hidden">
                         <div className="flex pt-2 pl-3 pb-3 flex-col justify-between">
+                            {/* Infos Principaux*/}
                             <div>
                                 <p className="">{data.title}</p>
                                 <p>Par: {data.author}</p>
@@ -32,25 +34,46 @@ export default function EntityNamecard({ data }) {
                                 </div>
                             </div>
 
-                            <div className="flex gap-2 items-center">
-                                <Link href={"/entity/" + data.category + "/" + data.id}>
-                                    <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                                </Link>
+                            <div>
+                                {
+                                    /* Liste de Genres*/
+                                    data.tags && data.tags.length > 0 ?
+                                        <div className="mb-6">
+                                            <p className="font-bold">Genres :</p>
+                                            {data.tags.map(tag => (
+                                                <div key={tag} className="flex gap-2 items-center" >
+                                                    <svg width="10" height="10" viewBox="0 0 24 24" fill="white" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle></svg>
+                                                    <Tag
+                                                        text={genres[tag - 1].name}
+                                                        className="bg-transparent border-none p-0 m-0"
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    : null
+                                }
 
-                                <Link href="/">
-                                    <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
-                                </Link>
+                                {/* Barre d'action*/}
+                                <div className="flex gap-2 items-center">
+                                    <Link href={"/entity/" + data.category + "/" + data.id}>
+                                        <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                                    </Link>
 
-                                <Link href="/">
-                                    <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                </Link>
+                                    <Link href="/">
+                                        <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                    </Link>
+
+                                    <Link href="/">
+                                        <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                         <div className="absolute left-1/2 p-4 bg-[#181818f1] h-full">
                             <p className="text-sm">{data.meta.description}</p>
                         </div>
                     </div>
-                : <p>{data.title}</p>
+                    : <p>{data.title}</p>
             }
         </div>
     );

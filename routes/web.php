@@ -11,12 +11,12 @@ use App\Models\Entity;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
-        'books'  => EntityResource::collection(Entity::where('id_category', 1)->take(8)->get()),
-        'musics' => EntityResource::collection(Entity::where('id_category', 3)->take(8)->get()),
-        'games'  => EntityResource::collection(Entity::where('id_category', 4)->take(8)->get()),
-        'movies' => EntityResource::collection(Entity::where('id_category', 5)->take(8)->get()),
-        'series' => EntityResource::collection(Entity::where('id_category', 6)->take(8)->get()),
-        'animes' => EntityResource::collection(Entity::where('id_category', 8)->take(8)->get()),
+        'books'  => EntityResource::collection(Entity::where('id_category', 1)->take(11)->get()),
+        'musics' => EntityResource::collection(Entity::where('id_category', 3)->take(11)->get()),
+        'games'  => EntityResource::collection(Entity::where('id_category', 4)->take(11)->get()),
+        'movies' => EntityResource::collection(Entity::where('id_category', 5)->take(11)->get()),
+        'series' => EntityResource::collection(Entity::where('id_category', 6)->take(11)->get()),
+        'animes' => EntityResource::collection(Entity::where('id_category', 8)->take(11)->get()),
     ]);
 })->name('home');
 

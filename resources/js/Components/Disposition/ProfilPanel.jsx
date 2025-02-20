@@ -52,6 +52,10 @@ export default function ProfilPanel({ setVisibility, user }) {
                                 <p>Créer un personnage</p>
                             </ItemPanel>
 
+                            <ItemPanel route="/listes" onClick={() => setVisibility(false)} className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                                <p>Modifier une entité</p>
+                            </ItemPanel>
 
                             <hr className="border-gray-500 my-2" />
 

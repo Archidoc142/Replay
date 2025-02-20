@@ -126,3 +126,7 @@ input {
 .form__field:required, .form__field:invalid {
     box-shadow: none;
 }
+
+.carrousel-container {
+    background: linear-gradient(to bottom, transparent, rgba(51, 48, 48, 0.7), transparent);
+}

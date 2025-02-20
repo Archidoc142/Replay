@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useRef, useImperativeHandle, forwardRef, useState } from "react";
 import ItemPanel from "../UI/ItemPanel";
 import { Link } from "@inertiajs/react";
 
-export default function LeftNav({ genres }) {
+const LeftNav = forwardRef(({ genres }, ref) => {
 
     const [secondaryPanel, setSecondaryPanel] = useState(false)
 
+    const divRef = useRef(null);
+
+    useImperativeHandle(ref, () => ({
+        getDiv: () => divRef.current,
+    }));
+
     return (
-        <div className="fixed h-screen w-72 z-40 bg-[#14151a] overflow-x-hidden font-bold">
+        <div ref={divRef} className="fixed h-screen z-40 w-0 bg-[#14151a] overflow-x-hidden font-bold whitespace-nowrap">
             <h3 className="m-4 text-lg">Naviguer</h3>
 
             <div className="flex flex-col">
@@ -42,4 +48,6 @@ export default function LeftNav({ genres }) {
             </div>
         </div>
     );
-}
+})
+
+export default LeftNav;

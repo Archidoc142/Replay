@@ -2,7 +2,7 @@ import Image from "@/Components/Common/Image";
 import { Link } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function EntityNamecard({ data }) {
+export default function MusicNamecard({ data }) {
 
     const [hover, setHover] = useState(false)
 

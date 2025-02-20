@@ -1,13 +1,35 @@
 import Icon from "../UI/Icon";
 import { Link } from '@inertiajs/react';
+import { gsap } from "gsap";
+import { useEffect } from "react";
 
-export default function Nav({setProfilPanel, setLeftNav, leftNav, profilPanel, icon_img}) {
+export default function Nav({ leftNavRef, mainRef, setProfilPanel, setLeftNav, leftNav, profilPanel, icon_img }) {
 
-    return(
+    function toggleNav() {
+        setLeftNav(!leftNav)
+    }
+
+    useEffect(() => {
+        if (leftNavRef?.current?.getDiv) {
+            gsap.to(leftNavRef.current.getDiv(), {
+                width: leftNav ? 288 : 0,
+                duration: 0.5,
+                ease: "power2.out",
+            });
+
+            gsap.to(mainRef.current, {
+                paddingLeft: leftNav ? 288 : 0,
+                duration: 0.5,
+                ease: "power2.out",
+            });
+        }
+    }, [leftNav])
+
+    return (
         <nav className="bg-[#23252b] flex justify-between h-16 sticky top-0 z-50">
             <div className="flex items-center h-full">
                 {/* Hamburger Icon*/}
-                <div onClick={() => setLeftNav(!leftNav)} className="hover:bg-[#14151a] h-full w-16 center cursor-pointer">
+                <div onClick={toggleNav} className="hover:bg-[#14151a] h-full w-16 center cursor-pointer">
                     <svg width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
                 </div>
 
