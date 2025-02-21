@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
 import AddImage from "../../UI/AddImage"
 
-export default function ImageForm({ category }) {
+export default function ImageForm({ SMF, category }) {
 
     const [meta, setMeta] = useState({
         img_couverture: "",
@@ -21,9 +21,41 @@ export default function ImageForm({ category }) {
         e.preventDefault();
         if (meta['type'] != "") {
             post('/entity', {
-                forceFormData: true
+                forceFormData: true,
+                onError: () => { SMF(3, "L'image n'a pas été ajouté") },
+                onSuccess: () => {
+                    SMF(1, "L'image à été ajouté")
+                    wipeInputValue()
+                }
             });
         }
+    }
+
+    function wipeInputValue() {
+        setData({
+            title: "",
+            meta: JSON.stringify({
+                img_couverture: "",
+                type: "",
+            }),
+            id_category: category,
+            author_name: "",
+            tags_form: [],
+            img_couverture: null,
+        });
+
+        setMeta({
+            img_couverture: "",
+            type: "",
+        });
+
+        document.querySelectorAll('input, textarea').forEach((el) => {
+            el.value = ""
+        })
+
+        document.querySelectorAll('form img').forEach((el) => {
+            el.src = "/img/placeholder_img.png"
+        })
     }
 
     function updateMeta(key, value) {
@@ -54,7 +86,7 @@ export default function ImageForm({ category }) {
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[55%]">
                     {/* Titre de l'image*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("title", e.target.value) }} />
+                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre de l'image</label>
                     </div>
 

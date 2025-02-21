@@ -20,7 +20,9 @@ class DatabaseSeeder extends Seeder
             EntitySeeder::class,
             ImageSeeder::class,
             TagSeeder::class,
+            TagEntitySeeder::class,
             AdminSeeder::class,
+            PlaylistSeeder::class,
         ]);
     }
 }

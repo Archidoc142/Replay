@@ -17,7 +17,7 @@ class Playlist extends Model
     protected $fillable = [
         'name',
         'file_path',
-        'id_user',
+        'id_user'
     ];
 
     public function user(): BelongsTo
@@ -27,7 +27,7 @@ class Playlist extends Model
 
     // Relation avec table Pivot
 
-    public function entities() : BelongsToMany
+    public function entities(): BelongsToMany
     {
         return $this->belongsToMany(Entity::class, 'playlist_entity', 'id_playlist', 'id_entity');
     }

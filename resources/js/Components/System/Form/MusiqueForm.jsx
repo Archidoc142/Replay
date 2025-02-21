@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
 import AddImage from "../../UI/AddImage";
 
-export default function MusiqueForm({ category }) {
+export default function MusiqueForm({ SMF, category }) {
 
     const [meta, setMeta] = useState({
         img_couverture: "",
@@ -20,9 +20,41 @@ export default function MusiqueForm({ category }) {
     function submit(e) {
         e.preventDefault();
         post('/entity', {
-            forceFormData: true
+            forceFormData: true,
+            onError: () => { SMF(3, "La musique n'a pas été ajouté") },
+            onSuccess: () => {
+                SMF(1, "La musique à été ajouté")
+                wipeInputValue()
+            }
         });
     }
+
+    function wipeInputValue() {
+        setData({
+            title: "",
+            meta: JSON.stringify({
+                img_couverture: "",
+                video: "",
+            }),
+            id_category: category,
+            author_name: "",
+            img_couverture: null,
+        });
+
+        setMeta({
+            img_couverture: "",
+            video: "",
+        });
+
+        document.querySelectorAll('input, textarea').forEach((el) => {
+            el.value = ""
+        })
+
+        document.querySelectorAll('form img').forEach((el) => {
+            el.src = "/img/placeholder_img.png"
+        })
+    }
+
 
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));

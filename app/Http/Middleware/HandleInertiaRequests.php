@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\UserResource;
+use App\Models\Playlist;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
@@ -34,8 +35,7 @@ class HandleInertiaRequests extends Middleware
         $user = null;
         $genres = Tag::all();
 
-        if(!is_null($request->user()))
-        {
+        if (!is_null($request->user())) {
             $user = new UserResource($request->user());
         }
 

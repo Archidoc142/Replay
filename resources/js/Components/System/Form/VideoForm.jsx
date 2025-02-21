@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
 import AddImage from "../../UI/AddImage";
 
-export default function VideoForm({ category }) {
+export default function VideoForm({ SMF, category }) {
 
     const [meta, setMeta] = useState({
         video: "",
@@ -18,9 +18,35 @@ export default function VideoForm({ category }) {
     function submit(e) {
         e.preventDefault();
         post('/entity', {
-            forceFormData: true
+            forceFormData: true,
+            onError: () => { SMF(3, "La vidéo n'a pas été ajouté") },
+            onSuccess: () => {
+                SMF(1, "La vidéo à été ajouté")
+                wipeInputValue()
+            }
         });
     }
+
+    function wipeInputValue() {
+        setData({
+            title: "",
+            meta: JSON.stringify({
+                video: "",
+            }),
+            id_category: category,
+            author_name: "",
+            img_couverture: null,
+        });
+
+        setMeta({
+            video: "",
+        });
+
+        document.querySelectorAll('input, textarea').forEach((el) => {
+            el.value = ""
+        })
+    }
+
 
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));

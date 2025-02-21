@@ -3,7 +3,7 @@ import { useForm } from '@inertiajs/react'
 import AddImage from "../../UI/AddImage";
 import Tag from "../../UI/Tag";
 
-export default function SerieForm({ category, tags }) {
+export default function SerieForm({ SMF, category, tags }) {
     const [meta, setMeta] = useState({
         img_couverture: "",
         description: "",
@@ -23,8 +23,48 @@ export default function SerieForm({ category, tags }) {
     function submit(e) {
         e.preventDefault();
         post('/entity', {
-            forceFormData: true
+            forceFormData: true,
+            onError: () => { SMF(3, "La série n'a pas été ajouté") },
+            onSuccess: () => {
+                SMF(1, "La série à été ajouté")
+                wipeInputValue()
+            }
         });
+    }
+
+    const [resetTags, setResetTags] = useState(0);
+
+    function wipeInputValue() {
+        setData({
+            title: "",
+            meta: JSON.stringify({
+                img_couverture: "",
+                description: "",
+                note: 0,
+                video: ""
+            }),
+            id_category: category,
+            author_name: "",
+            tags_form: [],
+            img_couverture: null,
+        });
+
+        setMeta({
+            img_couverture: "",
+            description: "",
+            note: 0,
+            video: ""
+        });
+
+        document.querySelectorAll('input, textarea').forEach((el) => {
+            el.value = ""
+        })
+
+        document.querySelectorAll('form img').forEach((el) => {
+            el.src = "/img/placeholder_img.png"
+        })
+
+        setResetTags(!resetTags)
     }
 
     function updateMeta(key, value) {
@@ -105,6 +145,7 @@ export default function SerieForm({ category, tags }) {
                             isClickable={true}
                             setData={setData}
                             data={data}
+                            resetTrigger={resetTags}
                         />
                     ))}
                 </div>

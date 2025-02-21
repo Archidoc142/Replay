@@ -11,7 +11,7 @@ use App\Models\Entity;
 
 Route::get('/', function () {
     return Inertia::render('Accueil', [
-        'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 4, 6, 8]) ->orderBy('id', 'desc')->take(19)->get()),
+        'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 2, 4, 6, 7]) ->orderBy('id', 'desc')->take(19)->get()),
     ]);
 })->name('home');
 

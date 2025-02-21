@@ -21,6 +21,7 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
+        "@gsap/react": "^2.1.2",
         "gsap": "^3.12.7"
     }
 }

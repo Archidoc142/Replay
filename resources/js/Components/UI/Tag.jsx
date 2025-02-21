@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function Tag({ id, text, isClickable = false, setData, data, className }) {
+export default function Tag({ id, text, isClickable = false, setData, data, className, resetTrigger = null }) {
 
     const [active, setActive] = useState(false)
 
@@ -17,6 +17,12 @@ export default function Tag({ id, text, isClickable = false, setData, data, clas
             setData("tags_form", data.tags_form.filter(t => t !== id));
         }
     }
+
+    useEffect(() => {
+        if (resetTrigger) {
+            setActive(false)
+        }
+    }, [resetTrigger])
 
     return (
         <p

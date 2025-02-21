@@ -73,7 +73,7 @@ class EntityController extends Controller
             $entity->tags()->syncWithoutDetaching($request->tags_form);
         }
 
-        return redirect("/");
+        return back();
     }
 
     /**
