@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EntityController;
+use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\EnsureUserIsLoggedIn;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,10 @@ Route::get('/search', function () {
 Route::get('/playlists', function () {
     return Inertia::render('Playlists');
 })->name('playlists');
+
+Route::controller(PlaylistController::class)->group(function() {
+    Route::post('/addToList', 'store')->name('addToList')->middleware(EnsureUserIsLoggedIn::class);
+});
 
 Route::controller(EntityController::class)->group(function() {
     Route::get('/entity', 'create')->name('createEntity')->middleware(EnsureUserIsLoggedIn::class);

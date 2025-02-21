@@ -29,7 +29,11 @@ class PlaylistController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $playlist = Playlist::find($request->id_playlist);
+
+        $playlist->entities()->toggle($request->id_entity);
+
+        return back();
     }
 
     /**
