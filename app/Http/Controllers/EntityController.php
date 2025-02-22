@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EntityResource;
 use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -27,7 +28,6 @@ class EntityController extends Controller
     {
         return Inertia::render('Entity/CreateEntityForms', [
             'categories' => Category::all(),
-            'tags' => Tag::all()
         ]);
     }
 
@@ -79,9 +79,12 @@ class EntityController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Entity $play)
+    public function show(Request $request)
     {
-        //
+        return Inertia::render('Entity/Entity', [
+            'categorie' => Category::where('name', $request->category)->first(),
+            'informations' => new EntityResource(Entity::find($request->id)),
+        ]);
     }
 
     /**

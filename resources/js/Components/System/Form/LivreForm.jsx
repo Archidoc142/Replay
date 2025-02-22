@@ -97,27 +97,27 @@ export default function LivreForm({ SMF, category, tags }) {
 
                     {/* Titre du livre*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
+                        <input name="title" type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre du livre</label>
                     </div>
 
                     <div className="flex gap-6">
                         {/* Réalisateur du livre*/}
                         <div className="form__group field !w-2/3">
-                            <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
+                            <input name="realisateur" type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
                             <label htmlFor="realisateur" className="form__label">Auteur du livre</label>
                         </div>
 
                         {/* Note du livre*/}
                         <div className="form__group field !w-1/3">
-                            <input type="number" className="form__field" min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
+                            <input name="note" type="number" className="form__field" min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
                             <label htmlFor="note" className="form__label">Note du livre</label>
                         </div>
                     </div>
 
                     {/* Lien vers le livre*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("lien", e.target.value) }} />
+                        <input name="lien" type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("lien", e.target.value) }} />
                         <label htmlFor="lien" className="form__label">Lien vers le livre</label>
                     </div>
 

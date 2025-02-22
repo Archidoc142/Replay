@@ -10,8 +10,8 @@ export default function EntityNamecard({ data, genres, isAnimated = false }) {
     const [isVisble, setIsVisble] = useState(false);
     const container = useRef(null);
 
-    const like_active = usePage().props.like_playlist_array.includes(data.id)
-    const signet_active = usePage().props.signet_playlist_array.includes(data.id)
+    const like_active = usePage().props.like_playlist_array?.includes(data.id)
+    const signet_active = usePage().props.signet_playlist_array?.includes(data.id)
 
     useEffect(() => {
         setIsVisble(true);

@@ -1,4 +1,4 @@
-import { Head } from "@inertiajs/react";
+import { Head, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import LivreForm from "../../Components/System/Form/LivreForm";
 import VideoForm from "../../Components/System/Form/VideoForm";
@@ -10,7 +10,9 @@ import FilmForm from "../../Components/System/Form/FilmForm";
 import AnimeForm from "@/Components/System/Form/AnimeForm";
 import MessageFlash from "@/Components/System/MessageFlash";
 
-export default function CreateEntityForms({ categories, tags }) {
+export default function CreateEntityForms({ categories }) {
+
+    const genres = usePage().props.genres
 
     const [selectedCat, setSelectedCat] = useState(0)
 
@@ -28,19 +30,19 @@ export default function CreateEntityForms({ categories, tags }) {
     function renderContent() {
         switch (selectedCat) {
             case "1":
-                return <LivreForm SMF={showMessageFlash} category={selectedCat} tags={tags}/>;
+                return <LivreForm SMF={showMessageFlash} category={selectedCat} tags={genres}/>;
             case "2":
-                return <AnimeForm SMF={showMessageFlash} category={selectedCat} tags={tags}/>;
+                return <AnimeForm SMF={showMessageFlash} category={selectedCat} tags={genres}/>;
             case "3":
                 return <MusiqueForm SMF={showMessageFlash} category={selectedCat}/>;
             case "4":
-                return <JeuForm SMF={showMessageFlash} category={selectedCat} tags={tags}/>;
+                return <JeuForm SMF={showMessageFlash} category={selectedCat} tags={genres}/>;
             case "5":
                 return <VideoForm SMF={showMessageFlash} category={selectedCat}/>;
             case "6":
-                return <SerieForm SMF={showMessageFlash} category={selectedCat} tags={tags}/>;
+                return <SerieForm SMF={showMessageFlash} category={selectedCat} tags={genres}/>;
             case "7":
-                return <FilmForm SMF={showMessageFlash} category={selectedCat} tags={tags}/>;
+                return <FilmForm SMF={showMessageFlash} category={selectedCat} tags={genres}/>;
             case "8":
                 return <ImageForm SMF={showMessageFlash} category={selectedCat}/>;
             default:
