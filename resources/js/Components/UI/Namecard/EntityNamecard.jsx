@@ -33,15 +33,15 @@ export default function EntityNamecard({ data, genres, isAnimated = false }) {
                 className="cursor-pointer max-w-[250px] min-h-[365px] max-h-[365px] group-hover:rounded-tl-lg group-hover:grayscale-[0.2]"
             />
 
-            {isVisble ? (
+            {isVisble ?
                 <div className="hidden group-hover:flex absolute w-full h-full rounded-lg overflow-hidden min-w-[250px] group-hover:min-w-[500px]">
                     <div className="flex pt-2 pl-3 pb-3 flex-col justify-between w-[250px] bg-[#181818bb]">
                         <div>
-                            <p className="">{data.title}</p>
-                            <p>Par: {data.author}</p>
+                            <p>{data.title}</p>
+                            { data.author ? <p>Par: {data.author}</p> : null}
                             <div className="flex items-center gap-1">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="yellow" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                                <p className="">{data.meta.note / 20}</p>
+                                <p>{data.meta.note / 20}</p>
                             </div>
                         </div>
 
@@ -82,9 +82,10 @@ export default function EntityNamecard({ data, genres, isAnimated = false }) {
                         </div>
                     </div>
                 </div>
-            ) : (
-                <p>{data.title}</p>
-            )}
+                : null
+            }
+
+            { !hover ? <p className="text-center">{data.title}</p> : null }
         </div>
     );
 }

@@ -1,4 +1,4 @@
-export default function Jeu({ game }) {
+export default function SimilarContentList({  }) {
     return (
         <div>
 

@@ -7,7 +7,7 @@ export default function ItemPanel({children, route, onClick, className}) {
     return (
         <Link
             href={route}
-            className={"hover:bg-[#23252b] text-lg px-6 py-[12px] unselectable " + className + ` ${url?.startsWith(`${route}`) ? '!text-[#ff5e00]' : ""}`}
+            className={"hover:bg-[#23252b] text-lg px-6 py-[12px] unselectable " + className + ` ${url === route ? '!text-[#ff5e00]' : ""}`}
             onClick={onClick}
         >
             {children}

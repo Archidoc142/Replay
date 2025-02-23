@@ -15,7 +15,7 @@ class EntitySeeder extends Seeder
     {
         DB::table('entity')->insert([
             [
-                'title' => 'Hazbin Hotel',
+                'title' => 'Loser, Baby',
                 'meta' => json_encode([
                     'img_couverture' => 'Hazbin Hotel Frame.webp',
                     'video' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/9sVoglgJjRg?si=_xd6VDvYur2FvTHG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'

@@ -6,7 +6,7 @@ import Dropdown from "../Breeze/Dropdown";
 export default function ProfilPanel({ setVisibility, user }) {
     return (
         <>
-            <div className="bg-[#14151a] fixed right-0 z-40 font-bold rounded-bl-lg overflow-hidden">
+            <div className="bg-[#14151a] fixed right-0 z-50 font-bold rounded-bl-lg overflow-hidden">
                 {
                     user ?
                         <div className="flex flex-col w-80">

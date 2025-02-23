@@ -1,4 +1,4 @@
-export default function Video({ video }) {
+export default function CharacterList({  }) {
     return (
         <div>
 

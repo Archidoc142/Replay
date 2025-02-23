@@ -1,6 +1,6 @@
 import { useForm, usePage } from "@inertiajs/react";
 
-export default function ButtonAddList({ id_entity = 0, type, children }) {
+export default function ButtonAddList({ id_entity = 0, type, children, className }) {
 
     let id_playlist = null
 
@@ -27,7 +27,7 @@ export default function ButtonAddList({ id_entity = 0, type, children }) {
 
     return (
         <form onSubmit={submit} className="flex items-center">
-            <button type="submit">
+            <button type="submit" className={className}>
                 {children}
             </button>
         </form>

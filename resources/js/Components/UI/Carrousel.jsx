@@ -5,6 +5,7 @@ import MusicNamecard from "./Namecard/MusicNamecard";
 import { usePage } from "@inertiajs/react";
 
 export default function Carrousel({ title, nb_items, datas, type = "", children, className }) {
+
     const [index, setIndex] = useState(0);
     const carrouselRef = useRef(null);
     const genres = usePage().props.genres;

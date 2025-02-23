@@ -13,6 +13,7 @@ use App\Models\Entity;
 Route::get('/', function () {
     return Inertia::render('Accueil', [
         'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 2, 4, 6, 7]) ->orderBy('id', 'desc')->take(19)->get()),
+        'musics' => EntityResource::collection(Entity::where('id_category', 3) ->orderBy('id', 'desc')->take(8)->get()),
     ]);
 })->name('home');
 
