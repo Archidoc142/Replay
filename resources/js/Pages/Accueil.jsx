@@ -36,11 +36,11 @@ export default function Accueil({ leftNav, last_items, musics }) {
 
             <Carrousel
                 title="Musiques"
-                nb_items={itemsToShow}
+                nb_items={4}
                 datas={musics.data}
                 type="music"
             >
-                <svg width="40" height="40" stroke="white" strokeWidth={2} viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M8 17V5l12-2v12"/></svg>
             </Carrousel>
 
             <div className="center py-40 text-9xl bg-gray-800 rounded-t-3xl">
