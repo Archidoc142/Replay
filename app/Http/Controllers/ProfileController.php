@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Image;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class ProfileController extends Controller
         return Inertia::render('Profile/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
+            'icons' => Image::where('is_profil', true)->get()
         ]);
     }
 
@@ -29,15 +31,24 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
+    $user->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
+    // Vérifier si l'email a été modifié
+    if ($user->isDirty('email')) {
+        $user->email_verified_at = null; // Réinitialiser la vérification de l'email
+    }
 
-        $request->user()->save();
+    // Assurez-vous que le champ id_img est correctement mis à jour
+    // Si vous voulez faire des validations ou des actions spécifiques avant de mettre à jour l'id_img, vous pouvez le faire ici
+    if ($request->has('id_img')) {
+        $user->id_img = $request->input('id_img');  // Mettre à jour l'id_img spécifiquement
+    }
 
-        return Redirect::route('profile.edit');
+    // Sauvegarder les changements dans la base de données
+    $user->save();
+
+    return Redirect::route('profile.edit');
     }
 
     /**

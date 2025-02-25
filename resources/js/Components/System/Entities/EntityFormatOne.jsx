@@ -7,7 +7,7 @@ import Tag from "@/Components/UI/Tag";
 import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function EntityFormatOne({ data }) {
+export default function EntityFormatOne({ data, id_cat }) {
 
     const genres = usePage().props.genres
 
@@ -15,6 +15,21 @@ export default function EntityFormatOne({ data }) {
     const signet_active = usePage().props.signet_playlist_array?.includes(data.id)
 
     const [showTrailer, setShowTrailer] = useState(false)
+
+    function renderLikeText() {
+        switch (id_cat) {
+            case 1: {/* Livre*/ }
+                return "le livre";
+            case 2: {/* Anime*/ }
+                return "l'anime";
+            case 6: {/* Série*/ }
+                return "la série";
+            case 7: {/* Film*/ }
+                return "le film";
+            default:
+                return "l'élément";
+        }
+    }
 
     return (
         <>
@@ -28,8 +43,8 @@ export default function EntityFormatOne({ data }) {
                             className="flex justify-center rounded-lg overflow-hidden"
                         />
                     </PopUp>
-                : null
-            : null}
+                    : null
+                : null}
 
             <div className="relative w-full min-h-screen">
                 {/* Image BG*/}
@@ -65,7 +80,7 @@ export default function EntityFormatOne({ data }) {
                                         </div>
                                     </div>
 
-                                    <p className="max-w-[80%]">{data.meta.description}</p>
+                                    <p>{data.meta.description}</p>
                                 </div>
                             </div>
 
@@ -91,7 +106,7 @@ export default function EntityFormatOne({ data }) {
                                         className="flex items-center gap-4 bg-[#4f4f4f] hover:bg-[#313235] py-2 px-4 rounded-md"
                                     >
                                         <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill={like_active ? "#ff5e00" : "none"} stroke={like_active ? "#ff5e00" : "white"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-                                        <p>{like_active ? `Retirer le ${data.category} des favoris` : "Ajouter le livre aux favoris"}</p>
+                                        <p>{like_active ? `Retirer ${renderLikeText()} des favoris` : `Ajouter ${renderLikeText()} aux favoris`}</p>
                                     </ButtonAddList>
 
                                     <ButtonAddList
@@ -116,7 +131,7 @@ export default function EntityFormatOne({ data }) {
                                             <svg className="group-hover:stroke-gray-500" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
                                             <p>Trailer</p>
                                         </button>
-                                    : null}
+                                        : null}
                                 </div>
                             </div>
                         </div>

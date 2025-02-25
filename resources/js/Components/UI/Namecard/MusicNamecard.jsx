@@ -7,7 +7,7 @@ import PopUp from "../PopUp";
 export default function MusicNamecard({ data }) {
 
     const [hover, setHover] = useState(false);
-    const [showTrailer, setShowMusic] = useState(false)
+    const [showMusic, setShowMusic] = useState(false)
 
     const like_active = usePage().props.like_playlist_array?.includes(data.id)
     const signet_active = usePage().props.signet_playlist_array?.includes(data.id)
@@ -21,7 +21,7 @@ export default function MusicNamecard({ data }) {
             >
                 {/* Vidéo*/}
                 {data.meta.video ?
-                    showTrailer ?
+                    showMusic ?
                         <PopUp setShow={setShowMusic}>
                             <h3 className="mb-4 text-3xl text-center max-w-[500px] mx-auto">{data.title}</h3>
                             <div
@@ -75,7 +75,7 @@ export default function MusicNamecard({ data }) {
                 : null}
 
             </div>
-            {!hover ? <p className="text-center mt-2">{data.title}</p> : null}
+            {!showMusic ? <p className="text-center mt-2">{data.title}</p> : null}
         </div>
     );
 }

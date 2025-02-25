@@ -75,7 +75,7 @@ export default function Login({ status, canResetPassword }) {
                                     setData('remember', e.target.checked)
                                 }
                             />
-                            <span class="checkmark"></span>
+                            <span className="checkmark"></span>
 
                             <span className="ms-2 text-sm text-gray-200">
                                 Se souvenir de moi

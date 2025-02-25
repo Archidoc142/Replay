@@ -17,7 +17,7 @@ export default function ProfilPanel({ setVisibility, user }) {
                             >
                                 <div className="flex items-center gap-6 text-[22px]">
                                     <Icon path={user?.icon_profil?.file_name || null} size={60} />
-                                    <p className="group-hover:text-[#ff5e00]">{user.username}</p>
+                                    <p className="group-hover:text-[#ff5e00]">{user.name}</p>
                                 </div>
                                 <svg className="group-hover:stroke-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
                             </ItemPanel>

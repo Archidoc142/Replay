@@ -4,7 +4,7 @@ import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        username: '',
+        name: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -30,17 +30,17 @@ export default function Register() {
 
                     <div className="form__group field mb-2">
                         <input
-                            id="username"
-                            name="username"
+                            id="name"
+                            name="name"
                             type="text"
                             className="form__field"
                             placeholder=""
-                            value={data.username}
+                            value={data.name}
                             required
-                            onChange={(e) => setData('username', e.target.value)}
+                            onChange={(e) => setData('name', e.target.value)}
                         />
-                        <label htmlFor="username" className="form__label">Nom</label>
-                        <InputError message={errors.username} className="mt-2" />
+                        <label htmlFor="name" className="form__label">Nom</label>
+                        <InputError message={errors.name} className="mt-2" />
                     </div>
 
                     <div className="form__group field mb-2">

@@ -3,8 +3,9 @@ import { gsap } from "gsap";
 import EntityNamecard from "./Namecard/EntityNamecard";
 import MusicNamecard from "./Namecard/MusicNamecard";
 import { usePage } from "@inertiajs/react";
+import Icon from "./Icon";
 
-export default function Carrousel({ title, nb_items, datas, type = "", children, className }) {
+export default function Carrousel({ title, nb_items, datas, type = "", children, className, setData, setShow }) {
 
     const [index, setIndex] = useState(0);
     const carrouselRef = useRef(null);
@@ -39,6 +40,11 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
         }
     }
 
+    function handleIconClick(id) {
+        setShow(false)
+        setData('id_img', id)
+    }
+
     return (
         <div className={"mt-4 overflow-hidden " + className}>
             <div className=" ml-6 mt-2 flex items-center gap-6">
@@ -59,16 +65,14 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
                         className="flex gap-4"
                     >
                         {datas.map((data) =>
-                            type !== "music" ? (
-                                <EntityNamecard
-                                    key={data.id}
-                                    data={data}
-                                    genres={genres}
-                                    isAnimated={true}
-                                />
+                            type === "icon" ? (
+                                <Icon key={data.id} path={data.file_name} onClick={() => handleIconClick(data.id)} className="hover:grayscale-[0.6]" />
+                            ) : type !== "music" ? (
+                                <EntityNamecard key={data.id} data={data} genres={genres} isAnimated={true} />
                             ) : (
                                 <MusicNamecard key={data.id} data={data} />
                             )
+
                         )}
                     </div>
                 </div>
