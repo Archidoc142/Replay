@@ -1,5 +1,5 @@
 import Image from "@/Components/Common/Image";
-import { Link, usePage } from "@inertiajs/react";
+import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 import ButtonAddList from "../ButtonAddList";
 import PopUp from "../PopUp";

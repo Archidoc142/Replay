@@ -26,8 +26,9 @@ Route::get('/playlists', function () {
 })->name('playlists');
 
 Route::controller(PlaylistController::class)->group(function() {
-    Route::post('/addToList', 'store')->name('addToList')->middleware(EnsureUserIsLoggedIn::class);
-});
+    Route::post('/addToList', 'toggle')->name('addToList');
+    Route::post('/playlist', 'store')->name('createPlaylist');
+})->middleware(EnsureUserIsLoggedIn::class);
 
 Route::controller(EntityController::class)->group(function() {
     Route::get('/entity', 'create')->name('createEntity')->middleware(EnsureUserIsLoggedIn::class);
@@ -36,8 +37,9 @@ Route::controller(EntityController::class)->group(function() {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/playlists', [ProfileController::class, 'playlists'])->name('profile.playlists');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-})->middleware(EnsureUserIsLoggedIn::class);;
+})->middleware(EnsureUserIsLoggedIn::class);
 
 require __DIR__.'/auth.php';

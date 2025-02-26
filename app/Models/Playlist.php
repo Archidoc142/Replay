@@ -17,7 +17,8 @@ class Playlist extends Model
     protected $fillable = [
         'name',
         'file_path',
-        'id_user'
+        'id_user',
+        'nb_items'
     ];
 
     public function user(): BelongsTo

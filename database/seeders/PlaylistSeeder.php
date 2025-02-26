@@ -17,12 +17,14 @@ class PlaylistSeeder extends Seeder
             [
                'name' => 'like',
                'file_path' => null,
-               'id_user' => 1
+               'id_user' => 1,
+               'nb_items' => 0,
             ],
             [
                 'name' => 'signet',
                 'file_path' => null,
-                'id_user' => 1
+                'id_user' => 1,
+                'nb_items' => 0,
             ]
         ]);
     }

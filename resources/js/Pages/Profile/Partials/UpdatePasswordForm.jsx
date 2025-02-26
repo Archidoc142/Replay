@@ -47,82 +47,63 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Update Password
+                <h2 className="text-2xl font-medium">
+                    Modifier le Mot de Passe
                 </h2>
 
-                <p className="mt-1 text-sm text-gray-600">
-                    Ensure your account is using a long, random password to stay
-                    secure.
-                </p>
+                <hr className="border-gray-500 mt-4" />
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel
-                        htmlFor="current_password"
-                        value="Current Password"
-                    />
-
-                    <TextInput
+            <form onSubmit={updatePassword} className="mt-2 w-2/3 space-y-6">
+                <div className="form__group field mb-2">
+                    <input
                         id="current_password"
                         ref={currentPasswordInput}
-                        value={data.current_password}
-                        onChange={(e) =>
-                            setData('current_password', e.target.value)
-                        }
+                        name="current_password"
                         type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="current-password"
+                        className="form__field"
+                        placeholder=""
+                        value={data.current_password}
+                        required
+                        onChange={(e) => setData('current_password', e.target.value)}
                     />
-
-                    <InputError
-                        message={errors.current_password}
-                        className="mt-2"
-                    />
+                    <label htmlFor="current_password" className="form__label">Mot de Passe Actuel</label>
+                    <InputError message={errors.current_password} className="mt-2" />
                 </div>
 
-                <div>
-                    <InputLabel htmlFor="password" value="New Password" />
-
-                    <TextInput
+                <div className="form__group field mb-2">
+                    <input
                         id="password"
                         ref={passwordInput}
-                        value={data.password}
-                        onChange={(e) => setData('password', e.target.value)}
+                        name="current_password"
                         type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
+                        className="form__field"
+                        placeholder=""
+                        value={data.password}
+                        required
+                        onChange={(e) => setData('password', e.target.value)}
                     />
-
+                    <label htmlFor="password" className="form__label">Nouveau Mot de Passe</label>
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div>
-                    <InputLabel
-                        htmlFor="password_confirmation"
-                        value="Confirm Password"
-                    />
-
-                    <TextInput
+                <div className="form__group field mb-2">
+                    <input
                         id="password_confirmation"
-                        value={data.password_confirmation}
-                        onChange={(e) =>
-                            setData('password_confirmation', e.target.value)
-                        }
+                        name="password_confirmation"
                         type="password"
-                        className="mt-1 block w-full"
-                        autoComplete="new-password"
+                        className="form__field"
+                        placeholder=""
+                        value={data.password_confirmation}
+                        required
+                        onChange={(e) => setData('password_confirmation', e.target.value)}
                     />
-
-                    <InputError
-                        message={errors.password_confirmation}
-                        className="mt-2"
-                    />
+                    <label htmlFor="password_confirmation" className="form__label">Nouveau Mot de Passe</label>
+                    <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton className="bg-transparent border-[3px] border-[#5a5a5c] rounded-none" disabled={processing}>Sauvegarder</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -132,7 +113,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600">
-                            Saved.
+                            Sauvegardé
                         </p>
                     </Transition>
                 </div>

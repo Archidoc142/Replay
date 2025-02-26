@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Image;
+use App\Models\Playlist;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,23 +33,23 @@ class ProfileController extends Controller
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $user = $request->user();
-    $user->fill($request->validated());
+        $user->fill($request->validated());
 
-    // Vérifier si l'email a été modifié
-    if ($user->isDirty('email')) {
-        $user->email_verified_at = null; // Réinitialiser la vérification de l'email
-    }
+        // Vérifier si l'email a été modifié
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null; // Réinitialiser la vérification de l'email
+        }
 
-    // Assurez-vous que le champ id_img est correctement mis à jour
-    // Si vous voulez faire des validations ou des actions spécifiques avant de mettre à jour l'id_img, vous pouvez le faire ici
-    if ($request->has('id_img')) {
-        $user->id_img = $request->input('id_img');  // Mettre à jour l'id_img spécifiquement
-    }
+        // Assurez-vous que le champ id_img est correctement mis à jour
+        // Si vous voulez faire des validations ou des actions spécifiques avant de mettre à jour l'id_img, vous pouvez le faire ici
+        if ($request->has('id_img')) {
+            $user->id_img = $request->input('id_img');  // Mettre à jour l'id_img spécifiquement
+        }
 
-    // Sauvegarder les changements dans la base de données
-    $user->save();
+        // Sauvegarder les changements dans la base de données
+        $user->save();
 
-    return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit');
     }
 
     /**
@@ -70,5 +71,17 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /**
+     * Display the user's playlists.
+     */
+    public function playlists(Request $request): Response
+    {
+        return Inertia::render('Profile/Playlists', [
+            'playlists' => Playlist::where('id_user', Auth::id())
+                ->whereNotIn('name', ['like', 'signet'])
+                ->get()
+        ]);
     }
 }

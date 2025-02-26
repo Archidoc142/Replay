@@ -7,15 +7,14 @@ export default function Edit({ mustVerifyEmail, status, icons }) {
         <div>
             <Head title="Profile" />
 
-            <div>
+            <div className='p-8'>
                 <UpdateProfileInformationForm
                     mustVerifyEmail={mustVerifyEmail}
                     status={status}
-                    className="p-8"
                     icons={icons}
                 />
 
-                <UpdatePasswordForm className="max-w-xl" />
+                <UpdatePasswordForm className="mt-4" />
             </div>
         </div>
     );

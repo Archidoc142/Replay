@@ -45,8 +45,8 @@ class RegisteredUserController extends Controller
         ]);
 
         Playlist::insert([
-            ['name' => 'like', 'file_path' => null, 'id_user' => $user->id],
-            ['name' => 'signet', 'file_path' => null, 'id_user' => $user->id],
+            ['name' => 'like', 'file_path' => null, 'id_user' => $user->id, 'nb_items' => 0],
+            ['name' => 'signet', 'file_path' => null, 'id_user' => $user->id, 'nb_items' => 0],
         ]);
 
         event(new Registered($user));

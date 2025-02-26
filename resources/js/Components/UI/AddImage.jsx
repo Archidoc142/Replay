@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Image from '../Common/Image';
 
-export default function AddImage({filename, setFilename, title, className, onFileUpload }) {
+export default function AddImage({filename, setFilename, title, className, onFileUpload, isImgExpandable = true }) {
     const [imgSrc, setImgSrc] = useState("/img/placeholder_img.png");
 
     function upload(e) {
@@ -25,7 +25,7 @@ export default function AddImage({filename, setFilename, title, className, onFil
             :null}
 
             <Image
-                isExpandable={true}
+                isExpandable={isImgExpandable}
                 className="max-h-64"
                 src={imgSrc}
                 alt="Image sélectionnée"

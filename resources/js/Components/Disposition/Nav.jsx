@@ -54,7 +54,7 @@ export default function Nav({ leftNavRef, mainRef, setProfilPanel, setLeftNav, l
 
                 {/* Signet Icon*/}
                 <Link
-                    href="/playlists"
+                    href="/signet"
                     className="group hover:bg-[#14151a] h-full center px-4"
                 >
                     <svg className="group-hover:stroke-gray-500" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>

@@ -24,7 +24,7 @@ export default function UpdateProfileInformation({
 
     const submit = (e) => {
         e.preventDefault();
-        console.log(data);
+
         patch(route('profile.update'));
     };
 
@@ -57,32 +57,32 @@ export default function UpdateProfileInformation({
                         setData={setData}
                         setShow={setShowIconMenu}
                     >
-                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3"/><circle cx="12" cy="10" r="3"/><circle cx="12" cy="12" r="10"/></svg>                    </Carrousel>
+                        <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5.52 19c.64-2.2 1.84-3 3.22-3h6.52c1.38 0 2.58.8 3.22 3" /><circle cx="12" cy="10" r="3" /><circle cx="12" cy="12" r="10" /></svg>                    </Carrousel>
                 </PopUp>
                 : null}
 
             <form onSubmit={submit} className="py-8">
-                <div className='flex'>
+                <div className='flex gap-12'>
 
-                    <div className='flex justify-center items-center min-w-[15%] relative cursor-pointer'
+                    <div className='flex justify-center items-center relative cursor-pointer w-1/3'
                         onMouseEnter={() => setHover(true)}
                         onMouseLeave={() => setHover(false)}
                         onClick={() => setShowIconMenu(true)}
                     >
                         <Icon
                             path={img}
-                            size={140}
+                            size={300}
                             className="filter-[#181818bb]"
                         />
                         {hover ?
-                            <div className='absolute bg-[#181818bb] w-[140px] h-[140px] rounded-full flex flex-col justify-center items-center text-sm'>
+                            <div className='absolute bg-[#181818bb] w-[300px] h-[300px] rounded-full flex flex-col justify-center items-center text-lg gap-2'>
                                 <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><g transform="translate(2 3)"><path d="M20 16a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5c0-1.1.9-2 2-2h3l2-3h6l2 3h3a2 2 0 0 1 2 2v11z" /><circle cx="10" cy="10" r="4" /></g></svg>
                                 <p>Modifier l'icon</p>
                             </div>
                             : null}
                     </div>
 
-                    <div className='w-full mr-4'>
+                    <div className='w-2/3 mr-4'>
                         <div className="form__group field mb-2">
                             <input
                                 id="name"
@@ -112,6 +112,22 @@ export default function UpdateProfileInformation({
                             <label htmlFor="email" className="form__label">Email</label>
                             <InputError message={errors.email} className="mt-2" />
                         </div>
+
+                        <div className="flex items-center gap-4 mt-6 justify-end">
+                            <PrimaryButton className="bg-transparent border-[3px] border-[#5a5a5c] rounded-none" disabled={processing}>Sauvegarder</PrimaryButton>
+
+                            <Transition
+                                show={recentlySuccessful}
+                                enter="transition ease-in-out"
+                                enterFrom="opacity-0"
+                                leave="transition ease-in-out"
+                                leaveTo="opacity-0"
+                            >
+                                <p className="text-sm text-gray-600">
+                                    Sauvegardé
+                                </p>
+                            </Transition>
+                        </div>
                     </div>
                 </div>
 
@@ -136,22 +152,6 @@ export default function UpdateProfileInformation({
                         )}
                     </div>
                 )}
-
-                <div className="flex items-center gap-4 mt-6 mr-4 justify-end">
-                    <PrimaryButton className="bg-transparent border-[3px] border-[#5a5a5c] rounded-none" disabled={processing}>Sauvegarder</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600">
-                            Sauvegardé
-                        </p>
-                    </Transition>
-                </div>
             </form>
         </section>
     );

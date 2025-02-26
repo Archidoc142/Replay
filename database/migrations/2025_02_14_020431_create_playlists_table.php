@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('file_path')->nullable();
             $table->bigInteger('id_user')->unsigned();
+            $table->integer('nb_items')->default(0);
         });
 
         Schema::table('playlist', function (Blueprint $table) {

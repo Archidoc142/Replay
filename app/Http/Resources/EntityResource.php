@@ -17,7 +17,7 @@ class EntityResource extends JsonResource
         return [
             "id" => $this->id,
             "title" => $this->title,
-            "author" => $this->author->name,
+            "author" => $this->author?->name,
             "category" => $this->category->name,
             "meta" => json_decode($this->meta),
             "tags" => $this->tags->pluck('id'),

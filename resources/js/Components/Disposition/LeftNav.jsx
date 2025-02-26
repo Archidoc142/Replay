@@ -12,7 +12,7 @@ const LeftNav = forwardRef(({ genres }, ref) => {
         getDiv: () => divRef.current,
     }));
 
-    const profilURLArray = ['/profile', '/playlists', '/liked', '/history']
+    const profilURLArray = ['/profile', '/playlists', '/liked', '/signet', '/history']
     const [isProfile, setIsProfile] = useState(false)
     const { url } = usePage()
 
@@ -34,6 +34,7 @@ const LeftNav = forwardRef(({ genres }, ref) => {
 
                             <ItemPanel route="/playlists">Listes de lecture</ItemPanel>
                             <ItemPanel route="/liked">Contenus aimés</ItemPanel>
+                            <ItemPanel route="/signet">Mes signets</ItemPanel>
                             <ItemPanel route="/history">Historique</ItemPanel>
 
                             <hr className="border-gray-500 m-2" />

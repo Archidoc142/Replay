@@ -81,6 +81,10 @@ export default function LivreForm({ SMF, category, tags }) {
         setData('meta', JSON.stringify(meta));
     }, [meta])
 
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex gap-2">
