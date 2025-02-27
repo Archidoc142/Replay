@@ -12,12 +12,12 @@ const LeftNav = forwardRef(({ genres }, ref) => {
         getDiv: () => divRef.current,
     }));
 
-    const profilURLArray = ['/profile', '/playlists', '/liked', '/signet', '/history']
+    const profilURLArray = ['/profile', '/playlists', '/playlist', '/liked', '/signet', '/history']
     const [isProfile, setIsProfile] = useState(false)
     const { url } = usePage()
 
     useEffect(() => {
-        setIsProfile(profilURLArray.includes(url))
+        setIsProfile(profilURLArray.some(prefix => url.startsWith(prefix)))
     }, [url])
 
     return (
@@ -28,14 +28,32 @@ const LeftNav = forwardRef(({ genres }, ref) => {
                         <h3 className="m-4 text-lg">Naviguer le profil</h3>
 
                         <div className="flex flex-col">
-                            <ItemPanel route="/profile">Modifier le profil</ItemPanel>
+                            <ItemPanel route="/profile" className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>
+                                <p>Modifier le profil</p>
+                            </ItemPanel>
 
                             <hr className="border-gray-500 m-2" />
 
-                            <ItemPanel route="/playlists">Listes de lecture</ItemPanel>
-                            <ItemPanel route="/liked">Contenus aimés</ItemPanel>
-                            <ItemPanel route="/signet">Mes signets</ItemPanel>
-                            <ItemPanel route="/history">Historique</ItemPanel>
+                            <ItemPanel route="/playlists" className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                                <p>Listes de lecture</p>
+                            </ItemPanel>
+
+                            <ItemPanel route="/liked" className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                                <p>Contenus aimés</p>
+                            </ItemPanel>
+
+                            <ItemPanel route="/signet" className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                <p>Mes signets</p>
+                            </ItemPanel>
+
+                            <ItemPanel route="/history" className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:fill-gray-500" fill="#d9d9d9" width="25" height="25" viewBox="0 0 24 24" ><path d="M11 7a1 1 0 0 1 2 0v5.411l-3.293 3.293a1 1 0 0 1-1.414-1.414L11 11.583V7zm1-5c5.514 0 10 4.486 10 10s-4.486 10-10 10a9.977 9.977 0 0 1-6.667-2.547 1 1 0 1 1 1.334-1.49A7.986 7.986 0 0 0 12 20c4.411 0 8-3.589 8-8s-3.589-8-8-8c-4.072 0-7.436 3.06-7.931 7H6l-3 3-3-3h2.051C2.554 5.954 6.823 2 12 2z"></path></svg>
+                                <p>Historique</p>
+                            </ItemPanel>
 
                             <hr className="border-gray-500 m-2" />
 

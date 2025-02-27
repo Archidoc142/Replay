@@ -2,7 +2,7 @@ import EntityFormatOne from "@/Components/System/Entities/EntityFormatOne";
 import EntityFormatTwo from "@/Components/System/Entities/EntityFormatTwo";
 import { Head } from "@inertiajs/react";
 
-export default function Entity({ categorie, informations }) {
+export default function Entity({ categorie, informations, plFromCat }) {
 
     function renderContent() {
         switch (categorie.id) {

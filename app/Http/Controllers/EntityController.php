@@ -8,6 +8,7 @@ use App\Models\Author;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Entity;
+use App\Models\Playlist;
 use App\Models\Tag;
 use Inertia\Inertia;
 
@@ -81,9 +82,12 @@ class EntityController extends Controller
      */
     public function show(Request $request)
     {
+        $category = Category::where('name', $request->category)->first();
+
         return Inertia::render('Entity/Entity', [
-            'categorie' => Category::where('name', $request->category)->first(),
+            'categorie' => $category,
             'informations' => new EntityResource(Entity::find($request->id)),
+            'plFromCat' => Playlist::where('id_category', $category->id)->get()
         ]);
     }
 

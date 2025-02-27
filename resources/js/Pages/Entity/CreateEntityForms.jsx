@@ -72,7 +72,7 @@ export default function CreateEntityForms({ categories }) {
                     >
                         <option className="bg-[#14151a] text-gray-500" value={0}>Choisir une catégorie</option>
                         {
-                            categories.map(category => (
+                            categories.filter(category => category.id !== 9).map(category => (
                                 <option
                                     value={category.id}
                                     key={category.id}

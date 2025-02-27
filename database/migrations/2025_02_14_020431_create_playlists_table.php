@@ -15,12 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('file_path')->nullable();
-            $table->bigInteger('id_user')->unsigned();
             $table->integer('nb_items')->default(0);
-        });
-
-        Schema::table('playlist', function (Blueprint $table) {
-            $table->foreign('id_user')->references('id')->on('users');
+            $table->foreignId('id_category')->constrained('category');
+            $table->foreignId('id_user')->constrained('users');
         });
     }
 

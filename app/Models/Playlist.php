@@ -18,6 +18,7 @@ class Playlist extends Model
         'name',
         'file_path',
         'id_user',
+        'id_category',
         'nb_items'
     ];
 

@@ -21,13 +21,12 @@ Route::get('/search', function () {
     return Inertia::render('Search');
 })->name('search');
 
-Route::get('/playlists', function () {
-    return Inertia::render('Playlists');
-})->name('playlists');
-
 Route::controller(PlaylistController::class)->group(function() {
+    Route::get('/playlists', 'index')->name('playlists');
+    Route::get('/playlist/{id}', 'show')->name('playlist');
     Route::post('/addToList', 'toggle')->name('addToList');
     Route::post('/playlist', 'store')->name('createPlaylist');
+    Route::delete('/playlist/delete/{id}', 'destroy')->name('playlist.destroy');
 })->middleware(EnsureUserIsLoggedIn::class);
 
 Route::controller(EntityController::class)->group(function() {
@@ -37,7 +36,6 @@ Route::controller(EntityController::class)->group(function() {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/playlists', [ProfileController::class, 'playlists'])->name('profile.playlists');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 })->middleware(EnsureUserIsLoggedIn::class);

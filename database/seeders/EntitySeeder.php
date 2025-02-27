@@ -151,7 +151,7 @@ class EntitySeeder extends Seeder
                 'id_author' => 1
             ],
             [
-                'title' => 'Ready For This Sing-Along',
+                'title' => 'Ready For This',
                 'meta' => json_encode([
                     'img_couverture' => 'Hazbin Hotel Frame.webp',
                     'video' => '<iframe width="560" height="315" src="https://www.youtube.com/embed/y1yNk8VeqqI?si=2olwV39AL5BT-SXV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>'

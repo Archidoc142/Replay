@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EntityResource;
+use App\Models\Category;
+use App\Models\Entity;
 use Illuminate\Http\Request;
 use App\Models\Playlist;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Inertia\Inertia;
 
 class PlaylistController extends Controller
 {
@@ -14,7 +19,12 @@ class PlaylistController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Profile/Playlists', [
+            'playlists' => Playlist::where('id_user', Auth::id())
+                ->whereNotIn('name', ['like', 'signet'])
+                ->get(),
+            'categories' => Category::all(),
+        ]);
     }
 
     /**
@@ -47,6 +57,7 @@ class PlaylistController extends Controller
             'name' => $request->name,
             'file_path' => $filePath,
             'id_user' => Auth::id(),
+            'id_category' => $request->id_category,
         ]);
 
         return back();
@@ -67,9 +78,14 @@ class PlaylistController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Playlist $play)
+    public function show(int $id)
     {
-        //
+        $playlist = Playlist::find($id);
+
+        return Inertia::render('Profile/Playlist', [
+            'entities' => EntityResource::collection($playlist->entities()->get()),
+            'playlist' => $playlist
+        ]);
     }
 
     /**
@@ -91,8 +107,14 @@ class PlaylistController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Playlist $play)
+    public function destroy(int $id)
     {
-        //
+        $playlist = Playlist::find($id);
+
+        $playlist->entities()->detach();
+
+        $playlist->delete();
+
+        return Redirect::to('/playlists');
     }
 }

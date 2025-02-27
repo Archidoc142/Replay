@@ -110,7 +110,7 @@ export default function FilmForm({ SMF, category, tags }) {
 
                         {/* Note du Film*/}
                         <div className="form__group field !w-1/3">
-                            <input type="number" className="form__field" min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
+                            <input type="number" className="form__field" value={meta.note} min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
                             <label htmlFor="note" className="form__label">Note du film</label>
                         </div>
                     </div>

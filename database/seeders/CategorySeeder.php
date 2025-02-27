@@ -14,14 +14,15 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         DB::table('category')->insert([
-            ['name' => 'Livre'],
-            ['name' => 'Anime'],
-            ['name' => 'Musique'],
-            ['name' => 'Jeu'],
-            ['name' => 'Vidéo'],
-            ['name' => 'Série'],
-            ['name' => 'Film'],
-            ['name' => 'Image'],
+            ['name' => 'Livres'],
+            ['name' => 'Animes'],
+            ['name' => 'Musiques'],
+            ['name' => 'Jeux'],
+            ['name' => 'Vidéos'],
+            ['name' => 'Séries'],
+            ['name' => 'Films'],
+            ['name' => 'Images'],
+            ['name' => 'Toutes'],
         ]);
     }
 }

@@ -72,16 +72,4 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
-
-    /**
-     * Display the user's playlists.
-     */
-    public function playlists(Request $request): Response
-    {
-        return Inertia::render('Profile/Playlists', [
-            'playlists' => Playlist::where('id_user', Auth::id())
-                ->whereNotIn('name', ['like', 'signet'])
-                ->get()
-        ]);
-    }
 }

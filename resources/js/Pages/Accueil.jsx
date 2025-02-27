@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 export default function Accueil({ leftNav, last_items, musics }) {
 
     const [itemsToShow, setItemsToShow] = useState(4)
+
     const [isLoading, setIsLoading] = useState(true)
     const [loadingProgress, setLoadingProgress] = useState(0)
 

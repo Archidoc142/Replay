@@ -1,11 +1,12 @@
 import PlaylistForm from "@/Components/System/Form/PlaylistForm";
+import LoadingScreen from "@/Components/System/LoadingScreen";
 import MessageFlash from "@/Components/System/MessageFlash";
-import Playlist from "@/Components/UI/Playlist";
+import PlaylistObject from "@/Components/UI/PlaylistObject";
 import PopUp from "@/Components/UI/PopUp";
 import { Head } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Playlists({ playlists }) {
+export default function Playlists({ playlists, categories }) {
 
     const [showForm, setShowForm] = useState(false)
 
@@ -13,6 +14,9 @@ export default function Playlists({ playlists }) {
     const [message, setMessage] = useState("")
     const [messageV, setMessageV] = useState(false)
     const [messageS, setMessageS] = useState(false)
+
+    const [isLoading, setIsLoading] = useState(true)
+    const [loadingProgress, setLoadingProgress] = useState(0)
 
     const showMessageFlash = (status, message, visibility = true) => {
         setMessageS(status)
@@ -24,6 +28,8 @@ export default function Playlists({ playlists }) {
         <>
             <Head title="Playlists" />
 
+            {isLoading && <LoadingScreen setIsLoading={setIsLoading} setLoadingProgress={setLoadingProgress} progress={loadingProgress} />}
+
             <MessageFlash
                 status={messageS}
                 message={message}
@@ -32,8 +38,12 @@ export default function Playlists({ playlists }) {
             />
 
             {showForm ?
-                <PopUp setShow={setShowForm} className="min-w-[40%]">
-                    <PlaylistForm SMF={showMessageFlash} setShow={setShowForm} />
+                <PopUp setShow={setShowForm} className="min-w-[50%]">
+                    <PlaylistForm
+                        SMF={showMessageFlash}
+                        setShow={setShowForm}
+                        categories={categories}
+                    />
                 </PopUp>
                 : null}
 
@@ -51,16 +61,24 @@ export default function Playlists({ playlists }) {
 
                 <hr className="border-gray-500 mt-4" />
 
-                {
-                    playlists.map(pl => (
-                        <Playlist
-                            key={pl.id}
-                            name={pl.name}
-                            img_path={pl.file_path}
-                            nb_items={pl.nb_items}
-                        />
-                    ))
-                }
+                <div className="mt-8 flex flex-wrap gap-8">
+                    {
+                        playlists.length > 0 ?
+                            playlists.map(pl => (
+                                <PlaylistObject
+                                    key={pl.id}
+                                    id={pl.id}
+                                    name={pl.name}
+                                    img_path={pl.file_path}
+                                    nb_items={pl.nb_items}
+                                    category={categories[pl.id_category - 1]}
+                                />
+                            )) :
+                            <div className="text-4xl text-gray-600 font-bold">
+                                <p>Aucune playlist</p>
+                            </div>
+                    }
+                </div>
             </div>
         </>
     )
