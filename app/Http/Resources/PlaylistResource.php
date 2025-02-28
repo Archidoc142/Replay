@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class EntityResource extends JsonResource
+class PlaylistResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,11 @@ class EntityResource extends JsonResource
     {
         return [
             "id" => $this->id,
-            "title" => $this->title,
-            "author" => $this->author?->name,
-            "category" => $this->category->name,
-            "id_category" => $this->category->id,
-            "meta" => json_decode($this->meta),
-            "tags" => $this->tags->pluck('id'),
+            "id_category" => $this->id_category,
+            "name" => $this->name,
+            "nb_items" => $this->nb_items,
+            "file_path" => $this->file_path,
+            "entities" => $this->entities,
         ];
     }
 }

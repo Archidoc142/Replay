@@ -29,7 +29,7 @@ export default function DefaultLayout({ children }) {
             />
 
             {/* Left Nav*/}
-            <LeftNav ref={leftNavRef} genres={genres}/>
+            <LeftNav setVisibility={setProfilPanel} ref={leftNavRef} genres={genres}/>
             {/* Profil Panel*/}
             {profilPanel ? <ProfilPanel setVisibility={setProfilPanel} user={user} /> : null}
 

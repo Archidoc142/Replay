@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\PlaylistResource;
 use App\Http\Resources\UserResource;
 use App\Models\Playlist;
 use App\Models\PlaylistEntity;
@@ -42,6 +43,8 @@ class HandleInertiaRequests extends Middleware
         $like_playlist_array = null;
         $signet_playlist_array = null;
 
+        $playlistsFromUser = null;
+
         if (!is_null($request->user())) {
             $user = new UserResource($request->user());
 
@@ -50,6 +53,10 @@ class HandleInertiaRequests extends Middleware
 
             $like_playlist_array = PlaylistEntity::where('id_playlist', $like_playlist_id)->pluck('id_entity')->toArray();
             $signet_playlist_array = PlaylistEntity::where('id_playlist', $signet_playlist_id)->pluck('id_entity')->toArray();
+
+            $playlistsFromUser = PlaylistResource::collection(Playlist::where('id_user', $user->id)
+                ->whereNotIn('name', ['like', 'signet'])
+                ->get());
         }
 
         return [
@@ -63,6 +70,8 @@ class HandleInertiaRequests extends Middleware
 
             'like_playlist_array' => $like_playlist_array,
             'signet_playlist_array' => $signet_playlist_array,
+
+            'playlistsFromUser' => $playlistsFromUser
         ];
     }
 }

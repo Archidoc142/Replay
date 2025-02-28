@@ -28,7 +28,7 @@ export default function PlaylistObject({ id, name, img_path, nb_items, category 
             </div>
 
             <p className="mt-1 text-lg winston">{name}</p>
-            <p className="">Type: {catName}</p>
+            <p className="">Type: {category.id !== 9 ? catName : "toutes"}</p>
         </Link>
     )
 }

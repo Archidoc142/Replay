@@ -20,8 +20,6 @@ export default function ButtonAddList({ id_entity = 0, type, children, className
         post('/addToList', {
             forceFormData: true,
             preserveScroll: true,
-            onError: () => { },
-            onSuccess: () => { }
         })
     }
 

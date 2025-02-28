@@ -4,6 +4,7 @@ import EntityNamecard from "./Namecard/EntityNamecard";
 import MusicNamecard from "./Namecard/MusicNamecard";
 import { usePage } from "@inertiajs/react";
 import Icon from "./Icon";
+import ListToggleButton from "./ListToggleButton";
 
 export default function Carrousel({ title, nb_items, datas, type = "", children, className, setData, setShow }) {
 
@@ -45,8 +46,22 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
         setData('id_img', id)
     }
 
+    // Ajout aux playlists
+    const [showForm, setShowForm] = useState(false)
+    const [id_entity, setId_entity] = useState(0)
+    const [id_category, setId_Category] = useState(0)
+
+    function handleOpenForm(id_entity, id_category) {
+        setShowForm(true)
+        setId_entity(id_entity)
+        setId_Category(id_category)
+    }
+
     return (
         <div className={"mt-4 overflow-hidden " + className}>
+
+            <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category}/>
+
             <div className=" ml-6 mt-2 flex items-center gap-6">
                 {children}
                 <h3 className="unselectable text-3xl text-[#ff5e00]">{title}</h3>
@@ -68,9 +83,9 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
                             type === "icon" ? (
                                 <Icon key={data.id} path={data.file_name} onClick={() => handleIconClick(data.id)} className="hover:grayscale-[0.6]" />
                             ) : type !== "music" ? (
-                                <EntityNamecard key={data.id} data={data} genres={genres} isAnimated={true} />
+                                <EntityNamecard key={data.id} data={data} genres={genres} isAnimated={true} handleOpenForm={handleOpenForm} />
                             ) : (
-                                <MusicNamecard key={data.id} data={data} />
+                                <MusicNamecard key={data.id} data={data} handleOpenForm={handleOpenForm} />
                             )
 
                         )}

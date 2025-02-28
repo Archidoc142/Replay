@@ -5,27 +5,27 @@ import Tag from "../Tag";
 import gsap from "gsap";
 import ButtonAddList from "../ButtonAddList";
 
-export default function EntityNamecard({ data, genres, isAnimated = false }) {
-    const [hover, setHover] = useState(false);
-    const [isVisble, setIsVisble] = useState(false);
-    const container = useRef(null);
+export default function EntityNamecard({ data, genres, isAnimated = false, handleOpenForm }) {
+    const [hover, setHover] = useState(false)
+    const [isVisble, setIsVisble] = useState(false)
+    const container = useRef(null)
 
-    const like_active = usePage().props.like_playlist_array?.includes(data.id);
-    const signet_active = usePage().props.signet_playlist_array?.includes(data.id);
+    const like_active = usePage().props.like_playlist_array?.includes(data.id)
+    const signet_active = usePage().props.signet_playlist_array?.includes(data.id)
 
     useEffect(() => {
-        setIsVisble(true);
+        setIsVisble(true)
         if (isAnimated) {
             gsap.to(container.current, {
                 width: hover ? 250 : 0,
                 duration: 0.3,
             });
         }
-    }, [hover, isAnimated]);
+    }, [hover, isAnimated])
 
     return (
         <div
-        className={`flex flex-col gap-2 text-lg relative group max-w-[250px] unselectable min-h-[429px] max-h-[429px] ${isAnimated ? "hover:min-w-[500px]" : ""}`}
+            className={`flex flex-col gap-2 text-lg relative group max-w-[250px] unselectable min-h-[429px] max-h-[429px] ${isAnimated ? "hover:min-w-[500px]" : ""}`}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
         >
@@ -75,6 +75,12 @@ export default function EntityNamecard({ data, genres, isAnimated = false }) {
                                 <ButtonAddList type="signet" id_entity={data.id}>
                                     <svg className="hover:stroke-[#ff5e00]" width="28" height="28" viewBox="0 0 24 24" fill={signet_active ? "#ff5e00" : "none"} stroke={signet_active ? "#ff5e00" : "white"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
                                 </ButtonAddList>
+
+                                {handleOpenForm ?
+                                    <button onClick={() => handleOpenForm(data.id, data.id_category)}>
+                                        <svg className="hover:stroke-[#ff5e00]" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                    </button> : null
+                                }
                             </div>
                         </div>
                     </div>
