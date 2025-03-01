@@ -81,10 +81,12 @@ class PlaylistController extends Controller
     public function show(int $id)
     {
         $playlist = Playlist::find($id);
+        $plName = $playlist->name === 'like' ? "Contenus aimés" : ($playlist->name === 'signet' ? "Mes Signets de Lecture" : null);
 
         return Inertia::render('Profile/Playlist', [
             'entities' => EntityResource::collection($playlist->entities()->get()),
-            'playlist' => $playlist
+            'playlist' => $playlist,
+            'name' => $plName
         ]);
     }
 

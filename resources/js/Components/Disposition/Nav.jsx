@@ -1,9 +1,11 @@
 import Icon from "../UI/Icon";
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { gsap } from "gsap";
 import { useEffect } from "react";
 
 export default function Nav({ leftNavRef, mainRef, setProfilPanel, setLeftNav, leftNav, profilPanel, icon_img }) {
+
+    const signet_playlist_id = usePage().props?.signet_playlist_id || 0
 
     function toggleNav() {
         setLeftNav(!leftNav)
@@ -54,7 +56,7 @@ export default function Nav({ leftNavRef, mainRef, setProfilPanel, setLeftNav, l
 
                 {/* Signet Icon*/}
                 <Link
-                    href="/signet"
+                    href={"/playlist/" + signet_playlist_id}
                     className="group hover:bg-[#14151a] h-full center px-4"
                 >
                     <svg className="group-hover:stroke-gray-500" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>

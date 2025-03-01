@@ -2,8 +2,13 @@ import ShadowScreen from "../UI/ShadowScreen";
 import Icon from "../UI/Icon";
 import ItemPanel from "../UI/ItemPanel";
 import Dropdown from "../Breeze/Dropdown";
+import { usePage } from "@inertiajs/react";
 
 export default function ProfilPanel({ setVisibility, user }) {
+
+    const like_playlist_id = usePage().props?.like_playlist_id || 0
+    const signet_playlist_id = usePage().props?.signet_playlist_id || 0
+
     return (
         <>
             <div className="bg-[#14151a] fixed right-0 z-50 font-bold rounded-bl-lg overflow-hidden">
@@ -29,14 +34,14 @@ export default function ProfilPanel({ setVisibility, user }) {
                                 <p>Listes de lecture</p>
                             </ItemPanel>
 
-                            <ItemPanel route="/liked" onClick={() => setVisibility(false)} className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                            <ItemPanel route={"/playlist/" + like_playlist_id} onClick={() => setVisibility(false)} className="text-gray-400 hover:text-white flex items-center gap-4 group">
                                 <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
                                 <p>Contenus aimés</p>
                             </ItemPanel>
 
-                            <ItemPanel route="/history" onClick={() => setVisibility(false)} className="text-gray-400 hover:text-white flex items-center gap-4 group">
-                                <svg className="group-hover:fill-gray-500" fill="#d9d9d9" width="25" height="25" viewBox="0 0 24 24" ><path d="M11 7a1 1 0 0 1 2 0v5.411l-3.293 3.293a1 1 0 0 1-1.414-1.414L11 11.583V7zm1-5c5.514 0 10 4.486 10 10s-4.486 10-10 10a9.977 9.977 0 0 1-6.667-2.547 1 1 0 1 1 1.334-1.49A7.986 7.986 0 0 0 12 20c4.411 0 8-3.589 8-8s-3.589-8-8-8c-4.072 0-7.436 3.06-7.931 7H6l-3 3-3-3h2.051C2.554 5.954 6.823 2 12 2z"></path></svg>
-                                <p>Historique</p>
+                            <ItemPanel route={"/playlist/" + signet_playlist_id} onClick={() => setVisibility(false)} className="text-gray-400 hover:text-white flex items-center gap-4 group">
+                                <svg className="group-hover:stroke-gray-500" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="#d9d9d9" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg>
+                                <p>Signets de lecture</p>
                             </ItemPanel>
 
                             <hr className="border-gray-500 my-2" />

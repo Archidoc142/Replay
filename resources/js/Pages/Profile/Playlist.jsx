@@ -7,7 +7,7 @@ import VideoNamecard from "@/Components/UI/Namecard/VideoNamecard";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Playlist({ entities, playlist }) {
+export default function Playlist({ entities, playlist, name }) {
 
     const [isLoading, setIsLoading] = useState(true)
     const [loadingProgress, setLoadingProgress] = useState(0)
@@ -58,16 +58,18 @@ export default function Playlist({ entities, playlist }) {
         setId_Category(id_category)
     }
 
+    const plName = name ? name : playlist.name
+
     return (
         <>
-            <Head title={playlist.name} />
+            <Head title={plName} />
 
             <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category}/>
 
             {isLoading && <LoadingScreen setIsLoading={setIsLoading} setLoadingProgress={setLoadingProgress} progress={loadingProgress} />}
 
             <div className='p-8'>
-                <h1 className="text-4xl font-medium">{playlist.name}</h1>
+                <h1 className="text-4xl font-medium">{plName}</h1>
 
                 <hr className="border-gray-500 mt-4 mb-8" />
 

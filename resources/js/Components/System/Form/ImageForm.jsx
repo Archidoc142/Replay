@@ -101,6 +101,7 @@ export default function ImageForm({ SMF, category }) {
                         className="text-gray-800 w-full cursor-pointer bg-gray-300 font-bold"
                         name="type"
                         onChange={(e) => updateMeta("type", e.target.value)}
+                        value={meta.type}
                     >
                         <option value="">Choisir une catégorie</option>
                         <option value="desktop">Wallpaper Desktop</option>

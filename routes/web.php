@@ -13,7 +13,8 @@ use App\Models\Entity;
 Route::get('/', function () {
     return Inertia::render('Accueil', [
         'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 2, 4, 6, 7]) ->orderBy('id', 'desc')->take(19)->get()),
-        'musics' => EntityResource::collection(Entity::where('id_category', 3) ->orderBy('id', 'desc')->take(8)->get()),
+        'musics' => EntityResource::collection(Entity::where('id_category', 3)->orderBy('id', 'desc')->take(8)->get()),
+        'images' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'desktop')->inRandomOrder()->take(5)->get()),
     ]);
 })->name('home');
 
@@ -24,8 +25,10 @@ Route::get('/search', function () {
 Route::controller(PlaylistController::class)->group(function() {
     Route::get('/playlists', 'index')->name('playlists');
     Route::get('/playlist/{id}', 'show')->name('playlist');
+
     Route::post('/addToList', 'toggle')->name('addToList');
     Route::post('/playlist', 'store')->name('createPlaylist');
+
     Route::delete('/playlist/delete/{id}', 'destroy')->name('playlist.destroy');
 })->middleware(EnsureUserIsLoggedIn::class);
 

@@ -17,6 +17,7 @@ export default function ImageNamecard({ data, handleOpenForm, inGrid = false }) 
                 alt={data.meta.img_couverture || "Image"}
                 isExpandable={true}
                 className={!inGrid ? "max-h-[400px]" : ""}
+                lazy={true}
             />
 
             {

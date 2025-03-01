@@ -36,6 +36,7 @@ export default function MusicNamecard({ data, handleOpenForm }) {
                     src={"/img/" + data.meta.img_couverture}
                     alt="General Entity Namecard"
                     className="max-w-[250px] group-hover:grayscale-[0.2]"
+                    lazy={true}
                 />
 
                 {hover ?

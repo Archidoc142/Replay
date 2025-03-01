@@ -1,7 +1,7 @@
 import { useState } from "react"
 import ShadowScreen from "../UI/ShadowScreen"
 
-export default function Image({ src, alt, isExpandable = false, className }) {
+export default function Image({ src, alt, isExpandable = false, className, lazy = false }) {
 
     const [bigImg, setBigImg] = useState(false)
 
@@ -12,7 +12,7 @@ export default function Image({ src, alt, isExpandable = false, className }) {
                 alt={alt ? alt : "Image"}
                 className={`${isExpandable ? "cursor-pointer" : ""} ` + className}
                 onClick={() => setBigImg(true)}
-                loading="lazy"
+                loading={ lazy ? "lazy" : undefined }
             />
 
             {
