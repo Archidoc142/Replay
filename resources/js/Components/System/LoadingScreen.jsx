@@ -38,7 +38,13 @@ export default function LoadingScreen({ setIsLoading, setLoadingProgress, progre
         if (images.length === 0) {
             setIsLoading(false);
         }
-    }, []);
+
+        const timeout = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000);
+
+        return () => clearTimeout(timeout);
+    }, [setIsLoading, setLoadingProgress]);
 
     return (
         <div className="fixed inset-0 center flex-col bg-black z-50 unselectable">
