@@ -41,7 +41,6 @@ export default function MusicNamecard({ data, handleOpenForm }) {
 
                 {hover ?
                     <div className="hidden group-hover:flex absolute w-full h-full cursor-pointer min-w-[250px]" onClick={(e) => {
-                        // Vérifier si le clic vient des boutons pour ne pas ouvrir le popup
                         if (!e.target.closest('.prevent-click')) {
                             setShowMusic(true);
                         }

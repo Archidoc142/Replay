@@ -32,7 +32,7 @@ export default function EntityNamecard({ data, genres, isAnimated = false, handl
             <Image
                 src={"/img/" + data.meta.img_couverture}
                 alt="General Entity Namecard"
-                className={`cursor-pointer max-w-[250px] min-h-[365px] max-h-[365px] group-hover:grayscale-[0.2] ${isAnimated ? "group-hover:rounded-tl-lg" : "group-hover:rounded-t-lg"}`}
+                className={`cursor-pointer min-w-[250px] max-w-[250px] min-h-[365px] max-h-[365px] group-hover:grayscale-[0.2] ${isAnimated ? "group-hover:rounded-tl-lg" : "group-hover:rounded-t-lg"}`}
                 lazy={true}
             />
 

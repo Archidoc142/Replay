@@ -48,15 +48,13 @@ export default function CarrouselImage({ images }) {
                                 key={img.id}
                                 src={"/img/" + img.meta.img_couverture}
                                 alt={img.meta.img_couverture}
-                                isExpandable={true}
                                 className={"rounded-xl " + (index !== i ? "hidden" : "")}
                                 onLoad={(e) => handleImageLoad(e, i)}
                             />
                         ))
                     }
 
-                    <div className="absolute bottom-2 left-2 bg-[#5050509d] p-2 rounded-lg">
-                        <p>{images[index].title}</p>
+                    <div className="absolute bottom-2 left-2 bg-[#3838389d] p-2 rounded-lg unselectable">
                         <p>Par : {images[index].author}</p>
                         <p>Dimensions : {imageDimensions[index].width} x {imageDimensions[index].height}</p>
                     </div>

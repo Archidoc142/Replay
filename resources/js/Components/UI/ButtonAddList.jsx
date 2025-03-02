@@ -16,7 +16,7 @@ export default function ButtonAddList({ id_entity = 0, type, children, className
     })
 
     function submit(e) {
-        e.preventDefault();
+        e.preventDefault()
         post('/addToList', {
             forceFormData: true,
             preserveScroll: true,
