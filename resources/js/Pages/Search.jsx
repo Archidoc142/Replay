@@ -67,7 +67,7 @@ export default function Search({ results }) {
         <>
             <Head title="Recherche" />
 
-            <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category}/>
+            <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category} />
 
             <form onSubmit={submit}>
                 <SearchBar
@@ -76,30 +76,70 @@ export default function Search({ results }) {
                     processing={processing}
                 />
 
-                <div className="center gap-2 mb-2">
-                    <input type="checkbox" id="books" name="books" checked={data.book} onChange={(e) => setData('book', e.target.checked)} />
-                    <label className="mr-4" htmlFor="books">Livres</label>
+                <div className="center flex-wrap gap-4 mb-2 mx-16 unselectable">
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.book} onChange={(e) => setData('book', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.book ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Livres
+                    </label>
 
-                    <input type="checkbox" id="anime" name="anime" checked={data.anime} onChange={(e) => setData('anime', e.target.checked)} />
-                    <label className="mr-4" htmlFor="anime">Animes</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.anime} onChange={(e) => setData('anime', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.anime ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Animes
+                    </label>
 
-                    <input type="checkbox" id="music" name="music" checked={data.music} onChange={(e) => setData('music', e.target.checked)} />
-                    <label className="mr-4" htmlFor="music">Musiques</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.music} onChange={(e) => setData('music', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.music ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Musiques
+                    </label>
 
-                    <input type="checkbox" id="game" name="game" checked={data.game} onChange={(e) => setData('game', e.target.checked)} />
-                    <label className="mr-4" htmlFor="game">Jeux vidéo</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.game} onChange={(e) => setData('game', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.game ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Jeux vidéo
+                    </label>
 
-                    <input type="checkbox" id="video" name="video" checked={data.video} onChange={(e) => setData('video', e.target.checked)} />
-                    <label className="mr-4" htmlFor="video">Vidéos</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.video} onChange={(e) => setData('video', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.video ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Vidéos
+                    </label>
 
-                    <input type="checkbox" id="serie" name="serie" checked={data.serie} onChange={(e) => setData('serie', e.target.checked)} />
-                    <label className="mr-4" htmlFor="serie">Séries</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.serie} onChange={(e) => setData('serie', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.serie ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                        Séries
+                    </label>
 
-                    <input type="checkbox" id="movie" name="movie" checked={data.movie} onChange={(e) => setData('movie', e.target.checked)} />
-                    <label className="mr-4" htmlFor="movie">Films</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.movie} onChange={(e) => setData('movie', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.movie ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            Films
+                    </label>
 
-                    <input type="checkbox" id="image" name="image" checked={data.image} onChange={(e) => setData('image', e.target.checked)} />
-                    <label className="mr-4" htmlFor="image">Images</label>
+                    <label className="flex items-center gap-2 cursor-pointer">
+                        <input className="hidden peer" checked={data.image} onChange={(e) => setData('image', e.target.checked)} type="checkbox"/>
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data.image ? "opacity-100" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            Images
+                    </label>
                 </div>
             </form>
 

@@ -4,6 +4,7 @@ import EntityNamecard from "@/Components/UI/Namecard/EntityNamecard";
 import ImageNamecard from "@/Components/UI/Namecard/ImageNamecard";
 import MusicNamecard from "@/Components/UI/Namecard/MusicNamecard";
 import VideoNamecard from "@/Components/UI/Namecard/VideoNamecard";
+import PaginationBar from "@/Components/UI/PaginationBar";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
@@ -92,21 +93,25 @@ export default function Playlist({ entities, playlist, name }) {
                                 }
                             </div>
                             :
-                            <div className="flex flex-wrap gap-8">
-                                {
-                                    entities.data.map((entity) => (
-                                        <div className="relative" key={entity.id}>
-                                            {renderContent(entity, false)}
+                            <>
+                                <div className="flex flex-wrap gap-8">
+                                    {
+                                        entities.data.map((entity) => (
+                                            <div className="relative" key={entity.id}>
+                                                {renderContent(entity, false)}
 
-                                            <form onSubmit={submit}>
-                                                <button type="submit" className="bg-[#585353c7] p-1 rounded-full absolute top-2 right-2 group" onClick={() => setData('id_entity', entity.id)}>
-                                                    <svg className="group-hover:stroke-[#ff5e00]" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    ))
-                                }
-                            </div>
+                                                <form onSubmit={submit}>
+                                                    <button type="submit" className="bg-[#585353c7] p-1 rounded-full absolute top-2 right-2 group" onClick={() => setData('id_entity', entity.id)}>
+                                                        <svg className="group-hover:stroke-[#ff5e00]" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+
+                                <PaginationBar links={entities.meta.links} />
+                            </>
                         :
                         <div className="flex justify-center items-center absolute inset-0 text-4xl text-gray-600 font-bold">
                             <p>Aucun élément</p>

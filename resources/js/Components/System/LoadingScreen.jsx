@@ -41,7 +41,7 @@ export default function LoadingScreen({ setIsLoading, setLoadingProgress, progre
 
         const timeout = setTimeout(() => {
             setIsLoading(false);
-        }, 2000);
+        }, 1500);
 
         return () => clearTimeout(timeout);
     }, [setIsLoading, setLoadingProgress]);

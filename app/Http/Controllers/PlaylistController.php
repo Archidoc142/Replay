@@ -84,7 +84,7 @@ class PlaylistController extends Controller
         $plName = $playlist->name === 'like' ? "Contenus aimés" : ($playlist->name === 'signet' ? "Mes Signets de Lecture" : null);
 
         return Inertia::render('Profile/Playlist', [
-            'entities' => EntityResource::collection($playlist->entities()->get()),
+            'entities' => EntityResource::collection($playlist->entities()->paginate(10)),
             'playlist' => $playlist,
             'name' => $plName
         ]);
