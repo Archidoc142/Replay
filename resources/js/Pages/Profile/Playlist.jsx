@@ -113,7 +113,7 @@ export default function Playlist({ entities, playlist, name }) {
                                 <PaginationBar links={entities.meta.links} />
                             </>
                         :
-                        <div className="flex justify-center items-center absolute inset-0 text-4xl text-gray-600 font-bold">
+                        <div className="flex justify-center items-center h-[300px] text-4xl text-gray-600 font-bold">
                             <p>Aucun élément</p>
                         </div>
                 }

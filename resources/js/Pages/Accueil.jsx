@@ -39,7 +39,7 @@ export default function Accueil({ leftNav, last_items, musics, images }) {
             <CarrouselImage images={images.data} />
 
             <Carrousel
-                title="Musiques"
+                title="Musiques du Jour"
                 nb_items={4}
                 datas={musics.data}
                 type="music"

@@ -2,7 +2,7 @@ import { Link, usePage } from "@inertiajs/react";
 
 export default function ItemPanel({children, route, onClick, className}) {
 
-    const url = usePage().url;
+    const url = usePage().url.split('?')[0];
 
     return (
         <Link

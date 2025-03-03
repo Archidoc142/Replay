@@ -1,6 +1,6 @@
-export default function SearchBar({onChange, value, processing}) {
+export default function SearchBar({onChange, value, processing, className}) {
     return(
-        <div className="flex justify-center my-3">
+        <div className={"flex justify-center my-3 " + className}>
             <div className="flex items-center bg-[#3a3a3a88] w-[55%] max-w-[750px] rounded-full overflow-hidden py-1 px-4 border-2 border-[#ff5e00]">
                 <input
                     className="w-full bg-transparent rounded-full border-0 text-white text-lg winston"

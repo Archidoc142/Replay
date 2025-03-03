@@ -227,39 +227,3 @@ input {
         transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
     }
 }
-
-
-/* From Uiverse.io by aboalsim114 */
-/* Hide the default checkbox */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-.container {
-    display: flex;
-    gap: 10px;
-}
-
-
-/* Create a custom checkbox */
-.checkmark {
-    position: relative;
-    box-shadow: rgb(255, 84, 0) 0px 0px 0px 2px;
-    background-color: rgba(16, 16, 16, 0.5);
-    height: 20px;
-    width: 20px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    margin-top: -1px;
-    transition: all 0.2s ease 0s;
-    cursor: pointer;
-    transform-origin: 0px 10px;
-    border-radius: 4px;
-    margin: -1px 10px 0px 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
