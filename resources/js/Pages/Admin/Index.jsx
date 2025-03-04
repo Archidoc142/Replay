@@ -48,7 +48,7 @@ export default function Index({ entities, category }) {
                                     <th className="border border-[#ff5e00]">Auteur</th>
                                     {entities?.data[0]?.meta.description && <th className="border border-[#ff5e00]">Description</th>}
                                     {entities?.data[0]?.meta.img_couverture && <th className="border border-[#ff5e00]">Image</th>}
-                                    {entities?.data[0]?.meta.note && <th className="border border-[#ff5e00] px-4">Note</th>}
+                                    {entities?.data[0]?.meta.note !== undefined ? <th className="border border-[#ff5e00] px-4">Note</th> : null}
                                     <th className="border border-[#ff5e00] px-4">Modifier</th>
                                 </tr>
                             </thead>
@@ -61,7 +61,7 @@ export default function Index({ entities, category }) {
                                             <td className="p-2 border border-[#ff5e00]">{entity?.author ? entity.author : "N/A"}</td>
                                             {entities?.data[0]?.meta.description && <td className="p-2 border border-[#ff5e00]">{entity.meta.description.slice(0, 60)}...</td>}
                                             {entities?.data[0]?.meta.img_couverture && <td className="p-2 border border-[#ff5e00]">{entity.meta.img_couverture}</td>}
-                                            {entities?.data[0]?.meta.note && <td className="p-2 border border-[#ff5e00]">{entity.meta.note}</td>}
+                                            {entities?.data[0]?.meta.note  !== undefined ? <td className="p-2 border border-[#ff5e00]">{entity.meta.note}</td> : null}
                                             <td className="p-2 border border-[#ff5e00]">
                                                 <Link href={"/modify/entity/" + entity.id}>
                                                     <svg className="mx-auto cursor-pointer hover:stroke-gray-500" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="butt" strokeLinejoin="round"><path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path><polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon></svg>

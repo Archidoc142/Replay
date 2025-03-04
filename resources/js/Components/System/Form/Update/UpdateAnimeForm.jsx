@@ -1,80 +1,40 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../../UI/AddImage";
-import Tag from "../../UI/Tag";
+import AddImage from "../../../UI/AddImage";
+import Tag from "../../../UI/Tag";
 
-export default function AnimeForm({ SMF, category, tags }) {
+export default function UpdateAnimeForm({ SMF, tags, entity }) {
 
     const [meta, setMeta] = useState({
-        img_couverture: "",
-        description: "",
-        note: 0,
-        lien: ""
+        img_couverture: entity.meta.img_couverture,
+        description: entity.meta.description,
+        note: entity.meta.note,
+        lien: entity.meta.lien
     });
 
-    const { data, setData, post, processing } = useForm({
-        title: "",
+    const { data, setData, put, processing } = useForm({
+        title: entity.title,
         meta: JSON.stringify(meta),
-        id_category: category,
-        author_name: "",
-        tags_form: [],
-        img_couverture: null,
+        tags_form: entity.tags,
     })
 
     function submit(e) {
-        e.preventDefault();
-        post('/entity', {
-            forceFormData: true,
-            onError: () => { SMF(3, "L'anime n'a pas été ajouté") },
+        e.preventDefault()
+
+        const route = '/entity/modify/' + entity.id
+        put(route, {
+            data,
+            onError: () => { SMF(3, "L'anime n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "L'anime à été ajouté")
-                wipeInputValue()
+                SMF(1, "L'anime à été modifié")
             }
         })
     }
 
     const [resetTags, setResetTags] = useState(0);
 
-    function wipeInputValue() {
-        setData({
-            title: "",
-            meta: JSON.stringify({
-                img_couverture: "",
-                description: "",
-                note: 0,
-                lien: ""
-            }),
-            id_category: category,
-            author_name: "",
-            tags_form: [],
-            img_couverture: null,
-        });
-
-        setMeta({
-            img_couverture: "",
-            description: "",
-            note: 0,
-            lien: ""
-        });
-
-        document.querySelectorAll('input, textarea').forEach((el) => {
-            el.value = ""
-        })
-
-        document.querySelectorAll('form img').forEach((el) => {
-            el.src = "/img/placeholder_img.png"
-        })
-
-        setResetTags(!resetTags)
-    }
-
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));
-    }
-
-    function handleFileUpload(key, file) {
-        setData(key, file);
-        setMeta(prev => ({ ...prev, [key]: file.name }));
     }
 
     useEffect(() => {
@@ -86,45 +46,46 @@ export default function AnimeForm({ SMF, category, tags }) {
             <div className="flex gap-2">
                 {/* Image de couverture du livre*/}
                 <AddImage
-                    onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
-                    setFilename={(value) => updateMeta("img_couverture", value)}
                     title="Image de couverture"
                     className="w-[40%]"
+                    src={"/img/" + meta.img_couverture}
+                    disabled={true}
                 />
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
 
-                    {/* Titre de l'Anime*/}
+                    {/* Titre du livre*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
+                        <input value={data.title} name="title" type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre de l'anime</label>
                     </div>
 
                     <div className="flex gap-6">
-                        {/* Réalisateur de l'Anime*/}
+                        {/* Réalisateur du livre*/}
                         <div className="form__group field !w-2/3">
-                            <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                            <label htmlFor="realisateur" className="form__label">Studio de l'anime</label>
+                            <input disabled name="realisateur" type="text" className="form__field" placeholder="" />
+                            <label htmlFor="realisateur" className="form__label">Studio (Ne peut pat être modifié)</label>
                         </div>
 
-                        {/* Note de l'Anime*/}
+                        {/* Note du livre*/}
                         <div className="form__group field !w-1/3">
-                            <input type="number" className="form__field" value={meta.note} min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
+                            <input name="note" type="number" className="form__field" value={meta.note} min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
                             <label htmlFor="note" className="form__label">Note de l'anime</label>
                         </div>
                     </div>
 
-                    {/* Lien vers l'Anime*/}
+                    {/* Lien vers le livre*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("lien", e.target.value) }} />
+                        <input value={meta.lien} name="lien" type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("lien", e.target.value) }} />
                         <label htmlFor="lien" className="form__label">Lien vers l'anime</label>
                     </div>
 
-                    {/* Description de l'Anime*/}
+                    {/* Description du livre*/}
                     <div className="mt-2">
                         <label htmlFor="description" className="font-bold">Description de l'anime</label><br />
                         <textarea
+                            value={meta.description}
                             name="description"
                             placeholder="Insérer la description de l'anime..."
                             onChange={(e) => updateMeta("description", e.target.value)}
@@ -135,7 +96,7 @@ export default function AnimeForm({ SMF, category, tags }) {
             </div>
 
             <div>
-                <h3 className="text-2xl mt-4 mb-2">Genres du livre</h3>
+                <h3 className="text-2xl mt-4 mb-2">Genres de l'anime</h3>
 
                 <div className="flex flex-wrap gap-2">
                     {tags.map(tag => (
@@ -147,6 +108,7 @@ export default function AnimeForm({ SMF, category, tags }) {
                             setData={setData}
                             data={data}
                             resetTrigger={resetTags}
+                            isActive={entity.tags.includes(tag.id)}
                         />
                     ))}
                 </div>

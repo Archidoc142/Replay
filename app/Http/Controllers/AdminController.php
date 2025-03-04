@@ -36,7 +36,7 @@ class AdminController extends Controller
 
     public function show(int $id) {
         return Inertia::render('Admin/ShowEntityForm', [
-            'entity' => Entity::find($id)
+            'entity' => new EntityResource(Entity::find($id))
         ]);
     }
 }

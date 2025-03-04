@@ -1,4 +1,4 @@
-import PlaylistForm from "@/Components/System/Form/PlaylistForm";
+import PlaylistForm from "@/Components/System/Form/Store/PlaylistForm";
 import LoadingScreen from "@/Components/System/LoadingScreen";
 import MessageFlash from "@/Components/System/MessageFlash";
 import PlaylistObject from "@/Components/UI/PlaylistObject";

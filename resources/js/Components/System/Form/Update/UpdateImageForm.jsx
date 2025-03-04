@@ -1,70 +1,36 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../../UI/AddImage"
+import AddImage from "../../../UI/AddImage";
 
-export default function ImageForm({ SMF, category }) {
+export default function UpdateImageForm({ SMF, entity }) {
 
     const [meta, setMeta] = useState({
-        img_couverture: "",
-        type: "",
+        img_couverture: entity.meta.img_couverture,
+        type: entity.meta.type,
     });
 
-    const { data, setData, post, processing } = useForm({
-        title: "",
+    const { data, setData, put, processing } = useForm({
+        title: entity.title,
         meta: JSON.stringify(meta),
-        id_category: category,
-        author_name: "",
-        img_couverture: null,
     })
 
     function submit(e) {
-        e.preventDefault();
-        if (meta['type'] != "") {
-            post('/entity', {
-                forceFormData: true,
-                onError: () => { SMF(3, "L'image n'a pas été ajouté") },
-                onSuccess: () => {
-                    SMF(1, "L'image à été ajouté")
-                    wipeInputValue()
-                }
-            });
-        }
-    }
+        e.preventDefault()
 
-    function wipeInputValue() {
-        setData({
-            title: "",
-            meta: JSON.stringify({
-                img_couverture: "",
-                type: "",
-            }),
-            id_category: category,
-            author_name: "",
-            tags_form: [],
-            img_couverture: null,
-        });
-
-        setMeta({
-            img_couverture: "",
-            type: "",
-        });
-
-        document.querySelectorAll('input, textarea').forEach((el) => {
-            el.value = ""
-        })
-
-        document.querySelectorAll('form img').forEach((el) => {
-            el.src = "/img/placeholder_img.png"
+        const route = '/entity/modify/' + entity.id
+        put(route, {
+            data,
+            onError: () => { SMF(3, "L'image n'a pas été modifié") },
+            onSuccess: () => {
+                SMF(1, "L'image à été modifié")
+            }
         })
     }
+
+    const [resetTags, setResetTags] = useState(0);
 
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));
-    }
-
-    function handleFileUpload(key, file) {
-        setData(key, file);
-        setMeta(prev => ({ ...prev, [key]: file.name }));
     }
 
     useEffect(() => {
@@ -76,24 +42,24 @@ export default function ImageForm({ SMF, category }) {
             <div className="flex gap-2">
                 {/* Image de couverture*/}
                 <AddImage
-                    onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
-                    setFilename={(value) => updateMeta("img_couverture", value)}
                     title="Image de couverture"
                     className="w-[45%]"
+                    src={"/img/" + meta.img_couverture}
+                    disabled={true}
                 />
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[55%]">
                     {/* Titre de l'image*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
+                        <input value={data.title} type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre de l'image</label>
                     </div>
 
                     {/* Dessinateur*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("author_name", e.target.value) }} />
-                        <label htmlFor="realisateur" className="form__label">Dessinateur</label>
+                        <input disabled type="text" className="form__field" placeholder="" required />
+                        <label htmlFor="realisateur" className="form__label">Dessinateur (Ne peut pat être modifié)</label>
                     </div>
 
                     <label className="mt-4" htmlFor="type">Type de l'image</label>
@@ -123,5 +89,4 @@ export default function ImageForm({ SMF, category }) {
             </div>
         </form>
     )
-
 }

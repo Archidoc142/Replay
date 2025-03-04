@@ -1,84 +1,41 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../../UI/AddImage";
-import Tag from "../../UI/Tag";
+import AddImage from "../../../UI/AddImage";
+import Tag from "../../../UI/Tag";
 
-export default function JeuForm({ SMF, category, tags }) {
+export default function UpdateJeuForm({ SMF, tags, entity }) {
 
     const [meta, setMeta] = useState({
-        img_couverture: "",
-        img_vignette: "",
-        description: "",
-        note: 0,
-        video: ""
+        img_couverture: entity.meta.img_couverture,
+        img_vignette: entity.meta.img_vignette,
+        description: entity.meta.description,
+        note: entity.meta.note,
+        video: entity.meta.video
     });
 
-    const { data, setData, post, processing } = useForm({
-        title: "",
+    const { data, setData, put, processing } = useForm({
+        title: entity.title,
         meta: JSON.stringify(meta),
-        id_category: category,
-        author_name: "",
-        tags_form: [],
-        img_couverture: null,
-        img_vignette: null,
+        tags_form: entity.tags,
     })
 
     function submit(e) {
-        e.preventDefault();
-        post('/entity', {
-            forceFormData: true,
-            onError: () => { SMF(3, "Le jeu n'a pas été ajouté") },
+        e.preventDefault()
+
+        const route = '/entity/modify/' + entity.id
+        put(route, {
+            data,
+            onError: () => { SMF(3, "Le jeu n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "Le jeu à été ajouté")
-                wipeInputValue()
+                SMF(1, "Le jeu à été modifié")
             }
-        });
+        })
     }
 
     const [resetTags, setResetTags] = useState(0);
 
-    function wipeInputValue() {
-        setData({
-            title: "",
-            meta: JSON.stringify({
-                img_couverture: "",
-                img_vignette: "",
-                description: "",
-                note: 0,
-                video: ""
-            }),
-            id_category: category,
-            author_name: "",
-            tags_form: [],
-            img_couverture: null,
-        });
-
-        setMeta({
-            img_couverture: "",
-            img_vignette: "",
-            description: "",
-            note: 0,
-            video: ""
-        });
-
-        document.querySelectorAll('input, textarea').forEach((el) => {
-            el.value = ""
-        })
-
-        document.querySelectorAll('form img').forEach((el) => {
-            el.src = "/img/placeholder_img.png"
-        })
-
-        setResetTags(!resetTags)
-    }
-
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));
-    }
-
-    function handleFileUpload(key, file) {
-        setData(key, file);
-        setMeta(prev => ({ ...prev, [key]: file.name }));
     }
 
     useEffect(() => {
@@ -90,26 +47,26 @@ export default function JeuForm({ SMF, category, tags }) {
             <div className="flex gap-2">
                 {/* Image de couverture du Jeu*/}
                 <AddImage
-                    onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
-                    setFilename={(value) => updateMeta("img_couverture", value)}
                     title="Image de couverture"
                     className="w-[40%]"
+                    src={"/img/" + meta.img_couverture}
+                    disabled={true}
                 />
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
 
                     {/* Titre du Jeu*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
+                        <input value={data.title} type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre du Jeu</label>
                     </div>
 
                     <div className="flex gap-6">
                         {/* Studio de développement du Jeu*/}
                         <div className="form__group field !w-2/3">
-                            <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                            <label htmlFor="realisateur" className="form__label">Studio de développement du Jeu</label>
+                            <input type="text" className="form__field" placeholder="" />
+                            <label htmlFor="realisateur" className="form__label">Studio (Ne peut pat être modifié)</label>
                         </div>
 
                         {/* Note du Jeu*/}
@@ -121,7 +78,7 @@ export default function JeuForm({ SMF, category, tags }) {
 
                     {/* Trailer du Jeu*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
+                        <input value={meta.video} type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
                         <label htmlFor="video" className="form__label">Iframe du trailer</label>
                     </div>
 
@@ -129,6 +86,7 @@ export default function JeuForm({ SMF, category, tags }) {
                     <div className="mt-2">
                         <label htmlFor="description" className="font-bold">Description du jeu</label><br />
                         <textarea
+                            value={meta.description}
                             name="description"
                             placeholder="Insérer la description du jeu..."
                             onChange={(e) => updateMeta("description", e.target.value)}
@@ -141,15 +99,15 @@ export default function JeuForm({ SMF, category, tags }) {
             <div>
                 {/* Image de vignette du Jeu*/}
                 <AddImage
-                    onFileUpload={(file) => handleFileUpload('img_vignette', file)}
                     filename={meta.img_vignette}
-                    setFilename={(value) => updateMeta("img_vignette", value)}
                     title="Image de vignette"
                     className="mt-6 max-h-64"
                     isHorizontal={true}
+                    src={"/img/" + meta.img_vignette}
+                    disabled={true}
                 />
 
-                <h3 className="text-2xl mt-4 mb-2">Genres du livre</h3>
+                <h3 className="text-2xl mt-4 mb-2">Genres du jeu</h3>
 
                 <div className="flex flex-wrap gap-2">
                     {tags.map(tag => (
@@ -161,6 +119,7 @@ export default function JeuForm({ SMF, category, tags }) {
                             setData={setData}
                             data={data}
                             resetTrigger={resetTags}
+                            isActive={entity.tags.includes(tag.id)}
                         />
                     ))}
                 </div>
@@ -177,5 +136,4 @@ export default function JeuForm({ SMF, category, tags }) {
             </div>
         </form>
     )
-
 }

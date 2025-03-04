@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useForm } from '@inertiajs/react'
-import AddImage from "../../UI/AddImage";
+import AddImage from "../../../UI/AddImage"
 
-export default function MusiqueForm({ SMF, category }) {
+export default function ImageForm({ SMF, category }) {
 
     const [meta, setMeta] = useState({
         img_couverture: "",
-        video: "",
+        type: "",
     });
 
     const { data, setData, post, processing } = useForm({
@@ -19,14 +19,16 @@ export default function MusiqueForm({ SMF, category }) {
 
     function submit(e) {
         e.preventDefault();
-        post('/entity', {
-            forceFormData: true,
-            onError: () => { SMF(3, "La musique n'a pas été ajouté") },
-            onSuccess: () => {
-                SMF(1, "La musique à été ajouté")
-                wipeInputValue()
-            }
-        });
+        if (meta['type'] != "") {
+            post('/entity', {
+                forceFormData: true,
+                onError: () => { SMF(3, "L'image n'a pas été ajouté") },
+                onSuccess: () => {
+                    SMF(1, "L'image à été ajouté")
+                    wipeInputValue()
+                }
+            });
+        }
     }
 
     function wipeInputValue() {
@@ -34,16 +36,17 @@ export default function MusiqueForm({ SMF, category }) {
             title: "",
             meta: JSON.stringify({
                 img_couverture: "",
-                video: "",
+                type: "",
             }),
             id_category: category,
             author_name: "",
+            tags_form: [],
             img_couverture: null,
         });
 
         setMeta({
             img_couverture: "",
-            video: "",
+            type: "",
         });
 
         document.querySelectorAll('input, textarea').forEach((el) => {
@@ -54,7 +57,6 @@ export default function MusiqueForm({ SMF, category }) {
             el.src = "/img/placeholder_img.png"
         })
     }
-
 
     function updateMeta(key, value) {
         setMeta(prev => ({ ...prev, [key]: value }));
@@ -72,7 +74,7 @@ export default function MusiqueForm({ SMF, category }) {
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex gap-2">
-                {/* Image de couverture du livre*/}
+                {/* Image de couverture*/}
                 <AddImage
                     onFileUpload={(file) => handleFileUpload('img_couverture', file)}
                     filename={meta.img_couverture}
@@ -82,24 +84,31 @@ export default function MusiqueForm({ SMF, category }) {
                 />
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[55%]">
-
-                    {/* Titre de la Musique*/}
+                    {/* Titre de l'image*/}
                     <div className="form__group field">
                         <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
-                        <label htmlFor="title" className="form__label">Titre de la musique</label>
+                        <label htmlFor="title" className="form__label">Titre de l'image</label>
                     </div>
 
-                    {/* Réalisateur de la Musique*/}
+                    {/* Dessinateur*/}
                     <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" onChange={(e) => { setData("author_name", e.target.value) }} />
-                        <label htmlFor="realisateur" className="form__label">Auteur de la musique</label>
+                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { setData("author_name", e.target.value) }} />
+                        <label htmlFor="realisateur" className="form__label">Dessinateur</label>
                     </div>
 
-                    {/* Iframe de la Musique*/}
-                    <div className="form__group field">
-                        <input type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
-                        <label htmlFor="video" className="form__label">Iframe de la musique</label>
-                    </div>
+                    <label className="mt-4" htmlFor="type">Type de l'image</label>
+                    <select
+                        className="text-gray-800 w-full cursor-pointer bg-gray-300 font-bold"
+                        name="type"
+                        onChange={(e) => updateMeta("type", e.target.value)}
+                        value={meta.type}
+                    >
+                        <option value="">Choisir une catégorie</option>
+                        <option value="desktop">Wallpaper Desktop</option>
+                        <option value="phone">Wallpaper Téléphone</option>
+                        <option value="fan_art">Fan Art</option>
+                        <option value="other">Autres</option>
+                    </select>
                 </div>
             </div>
 
@@ -114,4 +123,5 @@ export default function MusiqueForm({ SMF, category }) {
             </div>
         </form>
     )
+
 }

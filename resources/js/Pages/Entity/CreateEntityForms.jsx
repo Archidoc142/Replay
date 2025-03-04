@@ -1,13 +1,13 @@
 import { Head, usePage } from "@inertiajs/react";
 import { useState } from "react";
-import LivreForm from "../../Components/System/Form/LivreForm";
-import VideoForm from "../../Components/System/Form/VideoForm";
-import MusiqueForm from "../../Components/System/Form/MusiqueForm";
-import SerieForm from "../../Components/System/Form/SerieFilm";
-import ImageForm from "../../Components/System/Form/ImageForm";
-import JeuForm from "../../Components/System/Form/JeuForm";
-import FilmForm from "../../Components/System/Form/FilmForm";
-import AnimeForm from "@/Components/System/Form/AnimeForm";
+import LivreForm from "../../Components/System/Form/Store/LivreForm";
+import VideoForm from "../../Components/System/Form/Store/VideoForm";
+import MusiqueForm from "../../Components/System/Form/Store/MusiqueForm";
+import SerieForm from "../../Components/System/Form/Store/SerieFilm";
+import ImageForm from "../../Components/System/Form/Store/ImageForm";
+import JeuForm from "../../Components/System/Form/Store/JeuForm";
+import FilmForm from "../../Components/System/Form/Store/FilmForm";
+import AnimeForm from "@/Components/System/Form/Store/AnimeForm";
 import MessageFlash from "@/Components/System/MessageFlash";
 
 export default function CreateEntityForms({ categories }) {
@@ -85,7 +85,6 @@ export default function CreateEntityForms({ categories }) {
                     </select>
 
                     <div className="min-h-24">
-
                         {selectedCat != 0 ?
                         <div>
                             <h2 className="p-6 text-3xl">{categories[selectedCat - 1].name}</h2>

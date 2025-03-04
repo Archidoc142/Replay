@@ -48,9 +48,8 @@ Route::controller(EntityController::class)->group(function () {
     Route::post('/entity', 'store')->name('storeEntity')->middleware(EnsureUserIsLoggedIn::class);
     Route::get('/entity/{category}/{id}', 'show')->name('showEntity');
 
-    Route::get('/entity/modify/{id}', 'update')->name('entity.update');
-    Route::get('/entity/modify/{id}', 'destroy')->name('entity.destroy');
-
+    Route::put('/entity/modify/{id}', 'update')->name('entity.update')->middleware(EnsureUserIsLoggedIn::class);
+    Route::delete('/entity/modify/{id}', 'destroy')->name('entity.destroy')->middleware(EnsureUserIsLoggedIn::class);
 });
 
 Route::middleware('auth')->group(function () {

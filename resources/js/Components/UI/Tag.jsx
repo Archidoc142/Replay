@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-export default function Tag({ id, text, isClickable = false, setData, data, className, resetTrigger = null }) {
+export default function Tag({ id, text, isClickable = false, setData, data, className, resetTrigger = null, isActive = false }) {
 
-    const [active, setActive] = useState(false)
+    const [active, setActive] = useState(isActive)
 
     function handleClick() {
         if (isClickable) {

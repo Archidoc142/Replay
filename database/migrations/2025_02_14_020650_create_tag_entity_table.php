@@ -18,7 +18,7 @@ return new class extends Migration
         });
 
         Schema::table('tag_entity', function (Blueprint $table) {
-            $table->foreign('id_entity')->references('id')->on('entity');
+            $table->foreign('id_entity')->references('id')->on('entity')->onDelete('cascade');
             $table->foreign('id_tag')->references('id')->on('tag');
         });
     }

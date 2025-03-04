@@ -1,9 +1,16 @@
 {
+    "name": "replay",
+    "version": "1.0.0",
+    "description": "Cellarium Memoriae",
+    "main": "electron/main.js",
+    "author": "Antoine Auger",
     "private": true,
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite"
+        "dev": "vite",
+        "start": "electron .",
+        "electron": "electron electron/main.js"
     },
     "devDependencies": {
         "@headlessui/react": "^2.0.0",
@@ -13,6 +20,7 @@
         "autoprefixer": "^10.4.12",
         "axios": "^1.7.4",
         "concurrently": "^9.0.1",
+        "electron": "^34.3.0",
         "laravel-vite-plugin": "^1.2.0",
         "postcss": "^8.4.31",
         "react": "^18.2.0",

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Entity;
 use App\Models\Playlist;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
 class EntityController extends Controller
@@ -102,16 +103,28 @@ class EntityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Entity $play)
+    public function update(Request $request, int $id)
     {
-        //
+        $entity = Entity::find($id);
+
+        $entity->title = $request->title;
+        $entity->meta = $request->meta;
+
+        $entity->tags()->sync($request->tags_form);
+
+        $entity->save();
+
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Entity $play)
+    public function destroy(Request $request)
     {
-        //
+        $entity = Entity::find($request->id);
+        $entity->delete();
+
+        return Redirect::to('/modify/' . $request->id_category);
     }
 }
