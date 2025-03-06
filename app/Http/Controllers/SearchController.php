@@ -39,8 +39,15 @@ class SearchController extends Controller
 
         $results = $query->paginate(10);
 
+        $filters = array_map(function ($value) {
+            if ($value === "true" || $value === "false") return filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            if (is_numeric($value)) return $value + 0;
+            return $value;
+        }, $request->query());
+
         return Inertia::render('Search', [
             'results' => EntityResource::collection($results),
+            'filters' => $filters,
         ]);
     }
 }

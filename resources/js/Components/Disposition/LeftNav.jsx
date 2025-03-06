@@ -2,7 +2,7 @@ import { useRef, useImperativeHandle, forwardRef, useState, useEffect } from "re
 import ItemPanel from "../UI/ItemPanel";
 import { Link, usePage } from "@inertiajs/react";
 
-const LeftNav = forwardRef(({ genres, setVisibility }, ref) => {
+const LeftNav = forwardRef(({ genres, setVisibility, isProfile }, ref) => {
 
     const [secondaryPanel, setSecondaryPanel] = useState(false)
 
@@ -12,16 +12,9 @@ const LeftNav = forwardRef(({ genres, setVisibility }, ref) => {
         getDiv: () => divRef.current,
     }));
 
-    const profilURLArray = ['/profile', '/playlists', '/playlist', '/liked', '/signet', '/history', '/modify']
-    const [isProfile, setIsProfile] = useState(false)
-    const { url } = usePage()
-
     const like_playlist_id = usePage().props?.like_playlist_id || 0
     const signet_playlist_id = usePage().props?.signet_playlist_id || 0
 
-    useEffect(() => {
-        setIsProfile(profilURLArray.some(prefix => url.startsWith(prefix)))
-    }, [url])
 
     return (
         <div ref={divRef} className="fixed h-screen z-40 w-0 bg-[#14151a] overflow-x-hidden font-bold whitespace-nowrap">

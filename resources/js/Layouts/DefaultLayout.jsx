@@ -1,6 +1,6 @@
 import { usePage } from '@inertiajs/react'
 import Nav from '../Components/Disposition/Nav'
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import LeftNav from '@/Components/Disposition/LeftNav'
 import ProfilPanel from '@/Components/Disposition/ProfilPanel'
 
@@ -16,6 +16,24 @@ export default function DefaultLayout({ children }) {
     const leftNavRef = useRef(null)
     const mainRef = useRef(null)
 
+    const profilURLArray = ['/profile', '/playlists', '/playlist', '/liked', '/signet', '/history', '/modify']
+    const [isProfile, setIsProfile] = useState(false)
+
+    const { url } = usePage()
+
+    useEffect(() => {
+        const isInProfil = profilURLArray.some(prefix => url.startsWith(prefix))
+
+        if (url.startsWith('/modify/entity/')) {
+            document.body.style.backgroundColor = "#1f2a38";
+        } else {
+            document.body.style.backgroundColor = "black";
+        }
+
+        setIsProfile(isInProfil)
+        setLeftNav(isInProfil)
+    }, [url])
+
     return(
         <>
             <Nav
@@ -29,7 +47,13 @@ export default function DefaultLayout({ children }) {
             />
 
             {/* Left Nav*/}
-            <LeftNav setVisibility={setProfilPanel} ref={leftNavRef} genres={genres}/>
+            <LeftNav
+                setVisibility={setProfilPanel}
+                ref={leftNavRef}
+                genres={genres}
+                isProfile={isProfile}
+            />
+
             {/* Profil Panel*/}
             {profilPanel ? <ProfilPanel setVisibility={setProfilPanel} user={user} /> : null}
 

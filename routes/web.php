@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\EntityController;
 use App\Http\Controllers\PlaylistController;
 use App\Http\Controllers\ProfileController;
@@ -29,19 +30,19 @@ Route::controller(SearchController::class)->group(function () {
 });
 
 Route::controller(PlaylistController::class)->group(function () {
-    Route::get('/playlists', 'index')->name('playlists');
-    Route::get('/playlist/{id}', 'show')->name('playlist');
+    Route::get('/playlists', 'index')->name('playlists')->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/playlist/{id}', 'show')->name('playlist')->middleware(EnsureUserIsLoggedIn::class);
 
-    Route::post('/addToList', 'toggle')->name('addToList');
-    Route::post('/playlist', 'store')->name('createPlaylist');
+    Route::post('/addToList', 'toggle')->name('addToList')->middleware(EnsureUserIsLoggedIn::class);
+    Route::post('/playlist', 'store')->name('createPlaylist')->middleware(EnsureUserIsLoggedIn::class);
 
-    Route::delete('/playlist/delete/{id}', 'destroy')->name('playlist.destroy');
-})->middleware(EnsureUserIsLoggedIn::class);
+    Route::delete('/playlist/delete/{id}', 'destroy')->name('playlist.destroy')->middleware(EnsureUserIsLoggedIn::class);
+});
 
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/modify/{id}', 'index')->name('modify');
-    Route::get('/modify/entity/{id}', 'show')->name('modify.category');
-})->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/modify/{id}', 'index')->name('modify')->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/modify/entity/{id}', 'show')->name('modify.category')->middleware(EnsureUserIsLoggedIn::class);
+});
 
 Route::controller(EntityController::class)->group(function () {
     Route::get('/entity', 'create')->name('createEntity')->middleware(EnsureUserIsLoggedIn::class);
@@ -52,9 +53,14 @@ Route::controller(EntityController::class)->group(function () {
     Route::delete('/entity/modify/{id}', 'destroy')->name('entity.destroy')->middleware(EnsureUserIsLoggedIn::class);
 });
 
+Route::controller(CharacterController::class)->group(function () {
+    Route::get('/character', 'create')->name('character.create')->middleware(EnsureUserIsLoggedIn::class);
+    Route::post('/character', 'store')->name('character.store')->middleware(EnsureUserIsLoggedIn::class);
+});
+
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-})->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit')->middleware(EnsureUserIsLoggedIn::class);
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware(EnsureUserIsLoggedIn::class);
+});
 
 require __DIR__ . '/auth.php';

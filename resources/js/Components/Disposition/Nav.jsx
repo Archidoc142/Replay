@@ -28,7 +28,7 @@ export default function Nav({ leftNavRef, mainRef, setProfilPanel, setLeftNav, l
     }, [leftNav])
 
     return (
-        <nav className="bg-[#23252b] flex justify-between h-16 sticky top-0 z-50">
+        <nav className="bg-[#23252b] flex justify-between h-16 sticky top-0 z-50 border-b border-black">
             <div className="flex items-center h-full">
                 {/* Hamburger Icon*/}
                 <div onClick={toggleNav} className="hover:bg-[#14151a] h-full w-16 center cursor-pointer">

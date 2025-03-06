@@ -48,6 +48,7 @@ export default function Index({ entities, category }) {
                                     <th className="border border-[#ff5e00]">Auteur</th>
                                     {entities?.data[0]?.meta.description && <th className="border border-[#ff5e00]">Description</th>}
                                     {entities?.data[0]?.meta.img_couverture && <th className="border border-[#ff5e00]">Image</th>}
+                                    {entities?.data[0]?.meta.type && <th className="border border-[#ff5e00]">Type</th>}
                                     {entities?.data[0]?.meta.note !== undefined ? <th className="border border-[#ff5e00] px-4">Note</th> : null}
                                     <th className="border border-[#ff5e00] px-4">Modifier</th>
                                 </tr>
@@ -61,6 +62,7 @@ export default function Index({ entities, category }) {
                                             <td className="p-2 border border-[#ff5e00]">{entity?.author ? entity.author : "N/A"}</td>
                                             {entities?.data[0]?.meta.description && <td className="p-2 border border-[#ff5e00]">{entity.meta.description.slice(0, 60)}...</td>}
                                             {entities?.data[0]?.meta.img_couverture && <td className="p-2 border border-[#ff5e00]">{entity.meta.img_couverture}</td>}
+                                            {entities?.data[0]?.meta.type && <td className="p-2 border border-[#ff5e00]">{entity.meta.type}</td>}
                                             {entities?.data[0]?.meta.note  !== undefined ? <td className="p-2 border border-[#ff5e00]">{entity.meta.note}</td> : null}
                                             <td className="p-2 border border-[#ff5e00]">
                                                 <Link href={"/modify/entity/" + entity.id}>

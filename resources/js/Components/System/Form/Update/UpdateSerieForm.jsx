@@ -44,7 +44,7 @@ export default function UpdateSerieForm({ SMF, tags, entity }) {
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex gap-2">
-                {/* Image de couverture du livre*/}
+                {/* Image de couverture de la série*/}
                 <AddImage
                     filename={meta.img_couverture}
                     title="Image de couverture"
@@ -55,33 +55,33 @@ export default function UpdateSerieForm({ SMF, tags, entity }) {
 
                 <div className="pl-4 w-full flex flex-col gap-2 max-w-[60%]">
 
-                    {/* Titre du livre*/}
+                    {/* Titre de la série*/}
                     <div className="form__group field">
                         <input value={data.title} name="title" type="text" className="form__field" placeholder="" required onChange={(e) => { setData("title", e.target.value) }} />
                         <label htmlFor="title" className="form__label">Titre de la série</label>
                     </div>
 
                     <div className="flex gap-6">
-                        {/* Réalisateur du livre*/}
+                        {/* Réalisateur de la série*/}
                         <div className="form__group field !w-2/3">
                             <input disabled name="realisateur" type="text" className="form__field" placeholder="" />
                             <label htmlFor="realisateur" className="form__label">Réalisateur (Ne peut pat être modifié)</label>
                         </div>
 
-                        {/* Note du livre*/}
+                        {/* Note de la série*/}
                         <div className="form__group field !w-1/3">
                             <input name="note" type="number" className="form__field" value={meta.note} min={0} max={100} placeholder="" required onChange={(e) => { updateMeta("note", e.target.value) }} />
                             <label htmlFor="note" className="form__label">Note de la série</label>
                         </div>
                     </div>
 
-                    {/* Lien vers le livre*/}
+                    {/* Lien vers de la série*/}
                     <div className="form__group field">
                         <input value={meta.video} name="lien" type="text" className="form__field" placeholder="" required onChange={(e) => { updateMeta("video", e.target.value) }} />
                         <label htmlFor="lien" className="form__label">Trailer de la série</label>
                     </div>
 
-                    {/* Description du livre*/}
+                    {/* Description de la série*/}
                     <div className="mt-2">
                         <label htmlFor="description" className="font-bold">Description de la série</label><br />
                         <textarea

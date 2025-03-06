@@ -40,7 +40,7 @@ export default function UpdateMusicForm({ SMF, entity }) {
     return (
         <form onSubmit={submit} className="p-6">
             <div className="flex gap-2">
-                {/* Image de couverture du livre*/}
+                {/* Image de couverture de la musique*/}
                 <AddImage
                     filename={meta.img_couverture}
                     title="Image de couverture"

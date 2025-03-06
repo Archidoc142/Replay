@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Character;
+use Inertia\Inertia;
 
 class CharacterController extends Controller
 {
@@ -21,7 +22,7 @@ class CharacterController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Character/CreateCharacterForm');
     }
 
     /**
@@ -29,7 +30,7 @@ class CharacterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**

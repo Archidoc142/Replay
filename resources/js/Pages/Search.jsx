@@ -8,21 +8,48 @@ import SearchBar from "@/Components/UI/SearchBar";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Search({ results }) {
+export default function Search({ results, filters }) {
 
     const genres = usePage().props.genres;
 
     const { data, setData, get, processing } = useForm({
-        search: "",
-        book: true,
-        anime: true,
-        music: true,
-        game: true,
-        video: true,
-        serie: true,
-        movie: true,
-        image: true,
-    })
+        search: filters.search || "",
+        book: filters.book || false,
+        anime: filters.anime || false,
+        music: filters.music || false,
+        game: filters.game || false,
+        video: filters.video || false,
+        serie: filters.serie || false,
+        movie: filters.movie || false,
+        image: filters.image || false,
+    });
+
+    const categories = [
+        { key: 'book', label: 'Livres' },
+        { key: 'anime', label: 'Animes' },
+        { key: 'music', label: 'Musiques' },
+        { key: 'game', label: 'Jeux vidéo' },
+        { key: 'video', label: 'Vidéos' },
+        { key: 'serie', label: 'Séries' },
+        { key: 'movie', label: 'Films' },
+        { key: 'image', label: 'Images' }
+    ];
+
+    const params = () => {
+        const queryParams = new URLSearchParams();
+
+        if (data.search) queryParams.set('search', data.search);
+        if (data.book) queryParams.set('book', data.book);
+        if (data.anime) queryParams.set('anime', data.anime);
+        if (data.music) queryParams.set('music', data.music);
+        if (data.game) queryParams.set('game', data.game);
+        if (data.video) queryParams.set('video', data.video);
+        if (data.serie) queryParams.set('serie', data.serie);
+        if (data.movie) queryParams.set('movie', data.movie);
+        if (data.image) queryParams.set('image', data.image);
+
+        return queryParams.toString();
+    };
 
     function submit(e) {
         e.preventDefault();
@@ -77,69 +104,20 @@ export default function Search({ results }) {
                 />
 
                 <div className="center flex-wrap gap-4 mb-2 mx-16 unselectable">
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.book} onChange={(e) => setData('book', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.book ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Livres
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.anime} onChange={(e) => setData('anime', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.anime ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Animes
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.music} onChange={(e) => setData('music', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.music ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Musiques
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.game} onChange={(e) => setData('game', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.game ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Jeux vidéo
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.video} onChange={(e) => setData('video', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.video ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Vidéos
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.serie} onChange={(e) => setData('serie', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.serie ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Séries
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.movie} onChange={(e) => setData('movie', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.movie ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Films
-                    </label>
-
-                    <label className="flex items-center gap-2 cursor-pointer">
-                        <input className="hidden peer" checked={data.image} onChange={(e) => setData('image', e.target.checked)} type="checkbox" />
-                        <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
-                            <svg className={data.image ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                        </div>
-                        Images
-                    </label>
+                    {categories.map(({ key, label }) => (
+                        <label key={key} className="flex items-center gap-2 cursor-pointer">
+                            <input
+                                className="hidden peer"
+                                checked={data[key]}
+                                onChange={(e) => setData(key, e.target.checked)}
+                                type="checkbox"
+                            />
+                            <div className="border-2 border-[#ff5e00] rounded-md p-[3px] bg-black peer-checked:bg-[#8c1c1c]">
+                                <svg className={data[key] ? "opacity-100 pr-[1.5px]" : "opacity-0"} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="square" strokeLinejoin="arcs" ><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            {label}
+                        </label>
+                    ))}
                 </div>
             </form>
 
@@ -158,7 +136,7 @@ export default function Search({ results }) {
                 }
             </div>
 
-            <PaginationBar links={results.meta.links} />
+            <PaginationBar links={results.meta.links} params={params()} />
         </>
     )
 }
