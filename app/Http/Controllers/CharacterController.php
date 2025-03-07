@@ -41,12 +41,6 @@ class CharacterController extends Controller
             return $filename;
         }
 
-        /*foreach ($images as $i => &$image) {
-            if ($request->hasFile("image_$i")) {
-                $image['img'] = saveImageWithoutDuplicate($request->file("image_$i"));
-            }
-        }*/
-
         $images = array_map(function ($image) {
             unset($image['file']);
             return $image;
