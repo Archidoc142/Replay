@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('theme_color');
             $table->string('name');
             $table->json('meta')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->json('images')->nullable();
             $table->string('vignette');
         });

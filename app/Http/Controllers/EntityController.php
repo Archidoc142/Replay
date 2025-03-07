@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CharacterResource;
 use App\Http\Resources\EntityResource;
+use App\Http\Resources\MinimizeCharacterResource;
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\Character;
 use Illuminate\Http\Request;
 use App\Models\Entity;
 use App\Models\Playlist;
@@ -88,7 +91,9 @@ class EntityController extends Controller
         return Inertia::render('Entity/Entity', [
             'categorie' => $category,
             'informations' => new EntityResource(Entity::find($request->id)),
-            'plFromCat' => Playlist::where('id_category', $category->id)->get()
+            'plFromCat' => Playlist::where('id_category', $category->id)->get(),
+            'characters' => MinimizeCharacterResource::collection(Character::all()),
+            'charactersFromEntity' => Entity::find($request->id)->characters->pluck('id')
         ]);
     }
 

@@ -48,6 +48,7 @@ export default function AddImage({filename, setFilename, title, className, onFil
                         accept="image/*"
                         className='opacity-0 absolute top-0 left-0 px-5 py-2'
                         disabled={disabled}
+                        required={!disabled}
                     />
                 </div>
             </div>

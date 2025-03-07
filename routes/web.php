@@ -56,6 +56,10 @@ Route::controller(EntityController::class)->group(function () {
 Route::controller(CharacterController::class)->group(function () {
     Route::get('/character', 'create')->name('character.create')->middleware(EnsureUserIsLoggedIn::class);
     Route::post('/character', 'store')->name('character.store')->middleware(EnsureUserIsLoggedIn::class);
+
+    Route::put('/characterAdd', 'AddCharacterToEntity')->name('character.AddCharacterToEntity')->middleware(EnsureUserIsLoggedIn::class);
+    Route::delete('/character', 'destroy')->name('character.destroy')->middleware(EnsureUserIsLoggedIn::class);
+    Route::get('/character/{id}', 'show')->name('character.show');
 });
 
 Route::middleware('auth')->group(function () {

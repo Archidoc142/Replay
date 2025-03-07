@@ -7,7 +7,7 @@ import Tag from "@/Components/UI/Tag";
 import { usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function EntityFormatOne({ data, id_cat }) {
+export default function EntityFormatOne({ data, id_cat, characters, charactersFromEntity, SMF }) {
 
     const genres = usePage().props.genres
 
@@ -58,7 +58,7 @@ export default function EntityFormatOne({ data, id_cat }) {
                 <div className="absolute bg-[#191a1c] opacity-[0.8] h-screen w-full"></div>
 
                 <div className="absolute py-8 px-10 w-full">
-                    <div className="flex gap-8">
+                    <div className="flex gap-8 mb-12">
                         <Image
                             src={"/img/" + data.meta.img_couverture}
                             alt={data.title}
@@ -137,9 +137,16 @@ export default function EntityFormatOne({ data, id_cat }) {
                         </div>
                     </div>
 
-                    <CharacterList />
+                    <div className="flex">
+                        <CharacterList
+                            characters={characters}
+                            id_entity={data.id}
+                            SMF={SMF}
+                            charactersFromEntity={charactersFromEntity}
+                        />
 
-                    <SimilarContentList />
+                        <SimilarContentList />
+                    </div>
                 </div>
             </div>
         </>

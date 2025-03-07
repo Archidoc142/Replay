@@ -25,7 +25,7 @@ export default function CreateCharacterForm() {
         meta: JSON.stringify(meta),
         description: "",
         images: JSON.stringify(images),
-        vignette: "",
+        vignette: null,
         img_vignette: null,
     })
 
