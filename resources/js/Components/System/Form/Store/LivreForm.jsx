@@ -27,7 +27,7 @@ export default function LivreForm({ SMF, category, tags }) {
             forceFormData: true,
             onError: () => { SMF(3, "Le livre n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "Le livre à été ajouté")
+                SMF(1, "Le livre a été ajouté")
                 wipeInputValue()
             }
         })

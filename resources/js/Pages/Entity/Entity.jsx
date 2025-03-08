@@ -4,7 +4,7 @@ import MessageFlash from "@/Components/System/MessageFlash";
 import { Head } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Entity({ categorie, informations, plFromCat, characters, charactersFromEntity }) {
+export default function Entity({ categorie, informations, plFromUser, characters, charactersFromEntity, simContent }) {
 
     // Message Flash
     const [message, setMessage] = useState("")
@@ -25,17 +25,22 @@ export default function Entity({ categorie, informations, plFromCat, characters,
             case 7: {/* Film*/ }
                 return <EntityFormatOne
                             data={informations.data}
-                            id_cat={categorie.id}
+                            cat={categorie}
                             characters={characters.data}
                             SMF={showMessageFlash}
                             charactersFromEntity={charactersFromEntity}
+                            plFromUser={plFromUser}
+                            simContent={simContent}
                         />;
             case 4: {/* Jeu*/ }
                 return <EntityFormatTwo
                             data={informations.data}
+                            cat={categorie}
                             characters={characters.data}
                             SMF={showMessageFlash}
                             charactersFromEntity={charactersFromEntity}
+                            plFromUser={plFromUser}
+                            simContent={simContent}
                         />;
             default:
                 return null;

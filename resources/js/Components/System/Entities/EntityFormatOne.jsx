@@ -1,23 +1,27 @@
 import Image from "@/Components/Common/Image";
 import ButtonAddList from "@/Components/UI/ButtonAddList";
 import CharacterList from "@/Components/UI/CharacterList";
+import PlaylistObject from "@/Components/UI/PlaylistObject";
 import PopUp from "@/Components/UI/PopUp";
 import SimilarContentList from "@/Components/UI/SimilarContentList";
 import Tag from "@/Components/UI/Tag";
 import { usePage } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function EntityFormatOne({ data, id_cat, characters, charactersFromEntity, SMF }) {
+export default function EntityFormatOne({ data, cat, characters, charactersFromEntity, SMF, plFromUser, simContent }) {
 
     const genres = usePage().props.genres
 
     const like_active = usePage().props.like_playlist_array?.includes(data.id)
     const signet_active = usePage().props.signet_playlist_array?.includes(data.id)
 
+    const like_id = usePage().props.like_playlist_id
+    const signet_id = usePage().props.signet_playlist_id
+
     const [showTrailer, setShowTrailer] = useState(false)
 
     function renderLikeText() {
-        switch (id_cat) {
+        switch (cat.id) {
             case 1: {/* Livre*/ }
                 return "le livre";
             case 2: {/* Anime*/ }
@@ -54,7 +58,7 @@ export default function EntityFormatOne({ data, id_cat, characters, charactersFr
                 ></div>
 
                 {/* Style BG*/}
-                <div className="absolute top-[400px] bg-[#191a1c] opacity-[0.99] h-screen w-full"></div>
+                <div className="absolute top-[400px] bg-[#191a1c] opacity-[0.99] min-h-[calc(100vh+150px)] w-full"></div>
                 <div className="absolute bg-[#191a1c] opacity-[0.8] h-screen w-full"></div>
 
                 <div className="absolute py-8 px-10 w-full">
@@ -137,15 +141,35 @@ export default function EntityFormatOne({ data, id_cat, characters, charactersFr
                         </div>
                     </div>
 
-                    <div className="flex">
-                        <CharacterList
-                            characters={characters}
-                            id_entity={data.id}
-                            SMF={SMF}
-                            charactersFromEntity={charactersFromEntity}
-                        />
+                    <div className="flex gap-4">
+                        <div className="flex flex-col w-[70%]">
+                            <CharacterList
+                                characters={characters}
+                                id_entity={data.id}
+                                SMF={SMF}
+                                charactersFromEntity={charactersFromEntity}
+                            />
 
-                        <SimilarContentList />
+                            <SimilarContentList simContent={simContent} cat_name={cat.name} />
+                        </div>
+
+                        <div className="flex flex-col gap-4 items-center w-[30%]">
+                            {plFromUser.length > 2 ? <h3 className="text-2xl">Vos Playlists</h3> : null}
+                            {
+                                plFromUser.filter(pl => pl.id !== like_id && pl.id !== signet_id).map((pl) => (
+                                    <PlaylistObject
+                                        key={pl.id}
+                                        id={pl.id}
+                                        name={pl.name}
+                                        img_path={pl.file_path}
+                                        nb_items={pl.nb_items}
+                                        category={cat}
+                                        id_entity={data.id}
+                                        SMF={SMF}
+                                    />
+                                ))
+                            }
+                        </div>
                     </div>
                 </div>
             </div>

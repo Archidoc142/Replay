@@ -6,7 +6,7 @@ import { usePage } from "@inertiajs/react";
 import Icon from "./Icon";
 import ListToggleButton from "./ListToggleButton";
 
-export default function Carrousel({ title, nb_items, datas, type = "", children, className, setData, setShow }) {
+export default function Carrousel({ title, nb_items, datas, type = "", children, className, setData, setShow, noGradient = false, border = false }) {
 
     const [index, setIndex] = useState(0);
     const carrouselRef = useRef(null);
@@ -58,16 +58,16 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
     }
 
     return (
-        <div className={"mt-4 overflow-hidden " + className}>
+        <div className={"mt-4 overflow-hidden " + (border ? "border-4 border-[#5a5a5c] rounded-xl overflow-hidden pt-2 " : "") + className}>
 
             <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category}/>
 
-            <div className=" ml-6 mt-2 flex items-center gap-6">
+            <div className={"ml-6 mt-2 flex items-center " + (!border ? "gap-6" : "")}>
                 {children}
                 <h3 className="unselectable text-3xl text-[#ff5e00]">{title}</h3>
             </div>
 
-            <div className="flex carrousel-container">
+            <div className={"flex " + (!noGradient ? "carrousel-container " : "")}>
                 <button onClick={moveLeft}>
                     <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M15 18l-6-6 6-6" />

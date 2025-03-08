@@ -26,7 +26,7 @@ export default function SerieForm({ SMF, category, tags }) {
             forceFormData: true,
             onError: () => { SMF(3, "La série n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "La série à été ajouté")
+                SMF(1, "La série a été ajouté")
                 wipeInputValue()
             }
         });

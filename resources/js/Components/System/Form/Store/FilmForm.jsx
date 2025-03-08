@@ -27,7 +27,7 @@ export default function FilmForm({ SMF, category, tags }) {
             forceFormData: true,
             onError: () => { SMF(3, "Le film n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "Le film à été ajouté")
+                SMF(1, "Le film a été ajouté")
                 wipeInputValue()
             }
         });

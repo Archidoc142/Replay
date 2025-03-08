@@ -26,7 +26,7 @@ export default function UpdateFilmForm({ SMF, tags, entity }) {
             data,
             onError: () => { SMF(3, "Le film n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "Le film à été modifié")
+                SMF(1, "Le film a été modifié")
             }
         })
     }

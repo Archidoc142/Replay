@@ -26,7 +26,7 @@ export default function UpdateAnimeForm({ SMF, tags, entity }) {
             data,
             onError: () => { SMF(3, "L'anime n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "L'anime à été modifié")
+                SMF(1, "L'anime a été modifié")
             }
         })
     }

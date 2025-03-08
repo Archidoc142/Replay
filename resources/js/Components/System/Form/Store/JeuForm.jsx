@@ -29,7 +29,7 @@ export default function JeuForm({ SMF, category, tags }) {
             forceFormData: true,
             onError: () => { SMF(3, "Le jeu n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "Le jeu à été ajouté")
+                SMF(1, "Le jeu a été ajouté")
                 wipeInputValue()
             }
         });

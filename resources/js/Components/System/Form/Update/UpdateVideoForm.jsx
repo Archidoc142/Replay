@@ -21,7 +21,7 @@ export default function UpdateVideoForm({ SMF, entity }) {
             data,
             onError: () => { SMF(3, "La vidéo n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "La vidéo à été modifié")
+                SMF(1, "La vidéo a été modifié")
             }
         })
     }

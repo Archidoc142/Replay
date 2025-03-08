@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use App\Models\Entity;
 use App\Models\Playlist;
 use App\Models\Tag;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 
@@ -91,9 +92,10 @@ class EntityController extends Controller
         return Inertia::render('Entity/Entity', [
             'categorie' => $category,
             'informations' => new EntityResource(Entity::find($request->id)),
-            'plFromCat' => Playlist::where('id_category', $category->id)->get(),
+            'plFromUser' => Auth::check() ? Playlist::whereIn('id_category', [$category->id, 9])->where('id_user', Auth::id())->get() : collect(),
             'characters' => MinimizeCharacterResource::collection(Character::all()),
-            'charactersFromEntity' => Entity::find($request->id)->characters->pluck('id')
+            'charactersFromEntity' => Entity::find($request->id)->characters->pluck('id'),
+            'simContent' => EntityResource::collection(Entity::where('id_category', $category->id)->when($request->id, fn($query) => $query->where('id', '!=', $request->id))->take(8)->get()),
         ]);
     }
 

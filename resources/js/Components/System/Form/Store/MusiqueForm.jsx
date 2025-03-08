@@ -23,7 +23,7 @@ export default function MusiqueForm({ SMF, category }) {
             forceFormData: true,
             onError: () => { SMF(3, "La musique n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "La musique à été ajouté")
+                SMF(1, "La musique a été ajouté")
                 wipeInputValue()
             }
         });

@@ -24,7 +24,7 @@ export default function ImageForm({ SMF, category }) {
                 forceFormData: true,
                 onError: () => { SMF(3, "L'image n'a pas été ajouté") },
                 onSuccess: () => {
-                    SMF(1, "L'image à été ajouté")
+                    SMF(1, "L'image a été ajouté")
                     wipeInputValue()
                 }
             });

@@ -27,7 +27,7 @@ export default function UpdateJeuForm({ SMF, tags, entity }) {
             data,
             onError: () => { SMF(3, "Le jeu n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "Le jeu à été modifié")
+                SMF(1, "Le jeu a été modifié")
             }
         })
     }

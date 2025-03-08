@@ -22,7 +22,7 @@ export default function UpdateImageForm({ SMF, entity }) {
             data,
             onError: () => { SMF(3, "L'image n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "L'image à été modifié")
+                SMF(1, "L'image a été modifié")
             }
         })
     }

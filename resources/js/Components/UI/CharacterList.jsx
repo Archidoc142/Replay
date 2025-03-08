@@ -40,7 +40,7 @@ export default function CharacterList({ characters, id_entity, charactersFromEnt
     }
 
     return (
-        <div className="flex flex-col gap-4 items-center w-[72%] bg-[#16161696] pt-4 pb-8 rounded-xl border-4 border-[#5a5a5c]">
+        <div className="flex flex-col gap-4 items-center bg-[#16161696] pt-4 pb-8 rounded-xl border-4 border-[#5a5a5c]">
             <div className="flex gap-2 items-center">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ff5e00" strokeWidth="2" strokeLinecap="square" strokeLinejoin="arcs"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <h3 className="unselectable text-4xl text-[#ff5e00]">Personnages</h3>
@@ -96,7 +96,7 @@ export default function CharacterList({ characters, id_entity, charactersFromEnt
 
                     {/* Liste des personnages filtrés */}
                     {isFocused && filteredCharacters.length > 0 && (
-                        <div className="absolute left-0 w-full bg-[#27242493] border-4 border-[#5a5a5c] mt-1 rounded-lg z-10">
+                        <div className="absolute left-0 w-full bg-[#272424] border-4 border-[#5a5a5c] mt-1 rounded-lg z-10">
                             {filteredCharacters.map((character) => (
                                 <div
                                     key={character.id}

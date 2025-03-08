@@ -26,7 +26,7 @@ export default function UpdateSerieForm({ SMF, tags, entity }) {
             data,
             onError: () => { SMF(3, "La série n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "La série à été modifié")
+                SMF(1, "La série a été modifié")
             }
         })
     }

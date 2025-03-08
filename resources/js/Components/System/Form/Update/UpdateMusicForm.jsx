@@ -22,7 +22,7 @@ export default function UpdateMusicForm({ SMF, entity }) {
             data,
             onError: () => { SMF(3, "La musique n'a pas été modifié") },
             onSuccess: () => {
-                SMF(1, "La musique à été modifié")
+                SMF(1, "La musique a été modifié")
             }
         })
     }

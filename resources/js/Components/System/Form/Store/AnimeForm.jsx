@@ -27,7 +27,7 @@ export default function AnimeForm({ SMF, category, tags }) {
             forceFormData: true,
             onError: () => { SMF(3, "L'anime n'a pas été ajouté") },
             onSuccess: () => {
-                SMF(1, "L'anime à été ajouté")
+                SMF(1, "L'anime a été ajouté")
                 wipeInputValue()
             }
         })
