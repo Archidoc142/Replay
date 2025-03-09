@@ -17,7 +17,9 @@ Route::get('/', function () {
     return Inertia::render('Accueil', [
         'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 2, 4, 6, 7])->orderBy('id', 'desc')->take(15)->get()),
         'musics' => EntityResource::collection(Entity::where('id_category', 3)->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(8)->get()),
-        'images' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'desktop')->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(5)->get()),
+        'images_d' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'desktop')->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(5)->get()),
+        'images_f' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'fan_art')->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(5)->get()),
+        'video' => EntityResource::collection(Entity::where('id_category', 5)->orderByRaw('RAND(?)', [now()->format('Y-m-d H')])->take(8)->get()),
     ]);
 })->name('home');
 
@@ -27,6 +29,7 @@ Route::get('/search', function () {
 
 Route::controller(SearchController::class)->group(function () {
     Route::get('/search', 'index')->name('search');
+    Route::get('/search/populaire', 'populaire')->name('search.populaire');
 });
 
 Route::controller(PlaylistController::class)->group(function () {

@@ -8,7 +8,7 @@ import SearchBar from "@/Components/UI/SearchBar";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { useState } from "react";
 
-export default function Search({ results, filters }) {
+export default function Search({ results, filters = [] }) {
 
     const genres = usePage().props.genres;
 

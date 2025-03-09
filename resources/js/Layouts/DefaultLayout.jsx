@@ -8,7 +8,6 @@ import ProfilPanel from '@/Components/Disposition/ProfilPanel'
 export default function DefaultLayout({ children }) {
 
     const user = usePage().props.user?.data || null
-    const genres = usePage().props.genres
 
     const [profilPanel, setProfilPanel] = useState(false)
     const [leftNav, setLeftNav] = useState(false)
@@ -31,7 +30,6 @@ export default function DefaultLayout({ children }) {
         }
 
         setIsProfile(isInProfil)
-        setLeftNav(isInProfil)
     }, [url])
 
     return(
@@ -50,7 +48,6 @@ export default function DefaultLayout({ children }) {
             <LeftNav
                 setVisibility={setProfilPanel}
                 ref={leftNavRef}
-                genres={genres}
                 isProfile={isProfile}
             />
 

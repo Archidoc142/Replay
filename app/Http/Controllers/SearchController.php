@@ -50,4 +50,11 @@ class SearchController extends Controller
             'filters' => $filters,
         ]);
     }
+
+    public function populaire(Request $request)
+    {
+        return Inertia::render('Search', [
+            'results' => EntityResource::collection(Entity::orderByRaw('CAST(JSON_UNQUOTE(JSON_EXTRACT(meta, "$.note")) AS DECIMAL) DESC')->paginate(10)),
+        ]);
+    }
 }
