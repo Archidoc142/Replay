@@ -14,12 +14,21 @@ use App\Http\Resources\EntityResource;
 use App\Models\Entity;
 
 Route::get('/', function () {
+    $images = Entity::where('id_category', 8)
+        ->where('meta->type', 'desktop')
+        ->get();
+
+    $fan_art = Entity::where('id_category', 8)
+        ->where('meta->type', 'fan_art')
+        ->get();
+
     return Inertia::render('Accueil', [
         'last_items' => EntityResource::collection(Entity::whereIn('id_category', [1, 2, 4, 6, 7])->orderBy('id', 'desc')->take(15)->get()),
-        'musics' => EntityResource::collection(Entity::where('id_category', 3)->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(8)->get()),
-        'images_d' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'desktop')->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(5)->get()),
-        'images_f' => EntityResource::collection(Entity::where('id_category', 8)->where('meta->type', 'fan_art')->orderByRaw('RAND(?)', [now()->format('Y-m-d')])->take(5)->get()),
-        'video' => EntityResource::collection(Entity::where('id_category', 5)->orderByRaw('RAND(?)', [now()->format('Y-m-d H')])->take(8)->get()),
+        'musics' => EntityResource::collection(Entity::where('id_category', 3)->inRandomOrder()->take(15)->get()),
+        'images_main' => EntityResource::collection($images->shuffle()->take(5)),
+        'images_d' => EntityResource::collection($images->shuffle()->take(5)),
+        'images_f' => EntityResource::collection($fan_art->shuffle()->take(5)),
+        'video' => EntityResource::collection(Entity::where('id_category', 5)->inRandomOrder()->take(8)->get()),
     ]);
 })->name('home');
 

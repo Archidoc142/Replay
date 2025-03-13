@@ -5,8 +5,24 @@ import MusicNamecard from "./Namecard/MusicNamecard";
 import { usePage } from "@inertiajs/react";
 import Icon from "./Icon";
 import ListToggleButton from "./ListToggleButton";
+import PopUp from "./PopUp";
 
 export default function Carrousel({ title, nb_items, datas, type = "", children, className, setData, setShow, noGradient = false, border = false }) {
+
+    const [musicId, setMusicId] = useState(null)
+    const [selectedMusic, setSelectedMusic] = useState(null)
+    const [showMusic, setShowMusic] = useState(false)
+
+    useEffect(() => {
+        setSelectedMusic(datas.filter(data => data.id === musicId)[0])
+        setShowMusic(true)
+    }, [musicId])
+
+    useEffect(() => {
+        if (!showMusic) {
+            setMusicId(null)
+        }
+    }, [showMusic])
 
     const [index, setIndex] = useState(0);
     const carrouselRef = useRef(null);
@@ -15,7 +31,7 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
     const moveLeft = () => {
         let newIndex = 0
         if (index - nb_items > 0) { newIndex = index - nb_items }
-        else if (index != 0){ newIndex = 0 }
+        else if (index != 0) { newIndex = 0 }
         else if (datas.length - nb_items > 0) { newIndex = datas.length - nb_items + 1 }
 
         setIndex(newIndex)
@@ -60,7 +76,22 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
     return (
         <div className={"mt-4 overflow-hidden " + (border ? "border-4 border-[#5a5a5c] rounded-xl overflow-hidden pt-2 " : "") + className}>
 
-            <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category}/>
+            <ListToggleButton setShowForm={setShowForm} showForm={showForm} id_entity={id_entity} id_category={id_category} />
+
+            {/* Musique*/}
+            {type === "music" ?
+                selectedMusic?.meta.video ?
+                    showMusic ?
+                        <PopUp setShow={setShowMusic}>
+                            <h3 className="mb-4 text-3xl text-center max-w-[500px] mx-auto">{selectedMusic?.title}</h3>
+                            <div
+                                dangerouslySetInnerHTML={{ __html: selectedMusic?.meta.video }}
+                                className="flex justify-center rounded-lg overflow-hidden"
+                            />
+                        </PopUp>
+                        : null
+                    : null
+                : null}
 
             <div className={"ml-6 mt-2 flex items-center " + (!border ? "gap-6" : "")}>
                 {children}
@@ -85,7 +116,7 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
                             ) : type !== "music" ? (
                                 <EntityNamecard key={data.id} data={data} genres={genres} isAnimated={true} handleOpenForm={handleOpenForm} />
                             ) : (
-                                <MusicNamecard key={data.id} data={data} handleOpenForm={handleOpenForm} />
+                                <MusicNamecard key={data.id} data={data} handleOpenForm={handleOpenForm} inCarrousel={true} setMusicId={setMusicId} />
                             )
 
                         )}

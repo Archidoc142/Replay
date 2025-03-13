@@ -95,7 +95,7 @@ class EntityController extends Controller
             'plFromUser' => Auth::check() ? Playlist::whereIn('id_category', [$category->id, 9])->where('id_user', Auth::id())->get() : collect(),
             'characters' => MinimizeCharacterResource::collection(Character::all()),
             'charactersFromEntity' => Entity::find($request->id)->characters->pluck('id'),
-            'simContent' => EntityResource::collection(Entity::where('id_category', $category->id)->when($request->id, fn($query) => $query->where('id', '!=', $request->id))->take(8)->get()),
+            'simContent' => EntityResource::collection(Entity::where('id_category', $category->id)->when($request->id, fn($query) => $query->where('id', '!=', $request->id))->inRandomOrder()->take(8)->get()),
         ]);
     }
 

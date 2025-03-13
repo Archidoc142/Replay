@@ -4,7 +4,7 @@ import { useState } from "react";
 import ButtonAddList from "../ButtonAddList";
 import PopUp from "../PopUp";
 
-export default function MusicNamecard({ data, handleOpenForm }) {
+export default function MusicNamecard({ data, handleOpenForm, inCarrousel = false, setMusicId = null }) {
 
     const [hover, setHover] = useState(false);
     const [showMusic, setShowMusic] = useState(false)
@@ -18,17 +18,20 @@ export default function MusicNamecard({ data, handleOpenForm }) {
                 className="flex flex-col gap-2 text-lg relative group max-w-[250px] unselectable group"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
+                onClick={() => setMusicId && setMusicId(data.id)}
             >
                 {/* Vidéo*/}
-                {data.meta.video ?
-                    showMusic ?
-                        <PopUp setShow={setShowMusic}>
-                            <h3 className="mb-4 text-3xl text-center max-w-[500px] mx-auto">{data.title}</h3>
-                            <div
-                                dangerouslySetInnerHTML={{ __html: data.meta.video }}
-                                className="flex justify-center rounded-lg overflow-hidden"
-                            />
-                        </PopUp>
+                {!inCarrousel ?
+                    data.meta.video ?
+                        showMusic ?
+                            <PopUp setShow={setShowMusic}>
+                                <h3 className="mb-4 text-3xl text-center max-w-[500px] mx-auto">{data.title}</h3>
+                                <div
+                                    dangerouslySetInnerHTML={{ __html: data.meta.video }}
+                                    className="flex justify-center rounded-lg overflow-hidden"
+                                />
+                            </PopUp>
+                            : null
                         : null
                     : null}
 
@@ -78,10 +81,10 @@ export default function MusicNamecard({ data, handleOpenForm }) {
                             <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
                         </div>
                     </div>
-                : null}
+                    : null}
 
             </div>
-            {!showMusic ? <p className="text-center mt-2">{data.title}</p> : null}
+            <p className="text-center mt-2">{data.title}</p>
         </div>
     );
 }
