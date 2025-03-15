@@ -15,35 +15,7 @@ class ImageSeeder extends Seeder
     {
         DB::table('image')->insert([
             [
-                "file_name" => "Aether.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Lumine.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Venti.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Zhongli.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Ei.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Nahida.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Furina.webp",
-                "is_profil" => true,
-            ],
-            [
-                "file_name" => "Mavuika.webp",
+                "file_name" => "default_profil.png",
                 "is_profil" => true,
             ],
         ]);

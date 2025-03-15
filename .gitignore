@@ -38,6 +38,3 @@ Homestead.json
 # Misc
 /.vagrant
 /public/build
-
-#image
-/public/img

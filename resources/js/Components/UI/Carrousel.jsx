@@ -73,6 +73,8 @@ export default function Carrousel({ title, nb_items, datas, type = "", children,
         setId_Category(id_category)
     }
 
+    if (datas.length === 0) return null;
+
     return (
         <div className={"mt-4 overflow-hidden " + (border ? "border-4 border-[#5a5a5c] rounded-xl overflow-hidden pt-2 " : "") + className}>
 
