@@ -36,7 +36,7 @@ export default function Character({ character }) {
                 <ul className="flex justify-between gap-8 text-center text-lg winston overflow-hidden mt-4 mb-8 unselectable">
                     {char?.description ?
                         <li
-                            className={`cursor-pointer py-2 rounded-md`}
+                            className={`cursor-pointer py-2 rounded-md flex items-center justify-center`}
                             style={{
                                 backgroundColor: char.theme_color,
                                 width: menuSize,
@@ -50,7 +50,7 @@ export default function Character({ character }) {
                         meta.map((bloc, i) => (
                             <li
                                 key={i}
-                                className={`cursor-pointer py-2 rounded-md`}
+                                className={`cursor-pointer py-2 rounded-md flex items-center justify-center`}
                                 style={{
                                     backgroundColor: char.theme_color,
                                     width: menuSize,
